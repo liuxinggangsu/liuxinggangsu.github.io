@@ -1,1 +1,1799 @@
-<!doctype html><html class="theme-next pisces use-motion"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="//fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css"><link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css"><link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css"><meta name="keywords" content="刘兴刚"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1"><meta property="og:type" content="website"><meta property="og:title" content="刘兴刚博客"><meta property="og:url" content="http://liuxinggang.com/page/7/index.html"><meta property="og:site_name" content="刘兴刚博客"><meta property="og:locale" content="zh-Hans"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="刘兴刚博客"><script type="text/javascript" id="hexo.configuration">var NexT=window.NexT||{},CONFIG={scheme:"Pisces",sidebar:{position:"left",display:"post"},fancybox:!0,motion:!0,duoshuo:{userId:0,author:"博主"}}</script><link rel="canonical" href="http://liuxinggang.com/page/7/"><title> 刘兴刚博客</title></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans"><script type="text/javascript">var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="//hm.baidu.com/hm.js?ec066409d099697c71312c595dd643cc";var c=document.getElementsByTagName("script")[0];c.parentNode.insertBefore(e,c)}()</script><div class="container one-collumn sidebar-position-left page-home"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">刘兴刚博客</span><span class="logo-line-after"><i></i></span></a></div><p class="site-subtitle">关注Web开发,记录自己成长点滴</p></div><div class="site-nav-toggle"> <button><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br> 首页</a></li><li class="menu-item menu-item-categories"><a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br> 分类</a></li><li class="menu-item menu-item-about"><a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br> 关于</a></li><li class="menu-item menu-item-archives"><a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br> 归档</a></li><li class="menu-item menu-item-tags"><a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br> 标签</a></li><li class="menu-item menu-item-search"><a href="#" class="st-search-show-outputs"><i class="menu-item-icon fa fa-search fa-fw"></i><br> 搜索</a></li></ul><div class="site-search"><form class="site-search-form"> <input type="text" id="st-search-input" class="st-search-input st-default-search-input"></form><script type="text/javascript">!function(t,e,s,n,c,i,a){t.SwiftypeObject=c,t[c]=t[c]||function(){(t[c].q=t[c].q||[]).push(arguments)},i=e.createElement(s),a=e.getElementsByTagName(s)[0],i.async=1,i.src="//s.swiftypecdn.com/install/v2/st.js",a.parentNode.insertBefore(i,a)}(window,document,"script",0,"_st"),_st("install","R4PcZp6HShaABXQ7QdsT","2.0.0")</script></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><section id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> <a class="post-title-link" href="/2016-02-15-linux-ssh-mingling/" itemprop="url">Linux下SSH常用命令</a></h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-02-15T22:01:00+08:00" content="2016-02-15">2016-02-15</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/Linux平台/" itemprop="url" rel="index"><span itemprop="name">Linux平台</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-02-15-linux-ssh-mingling/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-02-15-linux-ssh-mingling/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><p>用linux的VPS，不学些linux命令怎么行，下面这些，记下了，基本上就能操作linxu的web VPS了。</p><div class="post-more-link text-center"> <a class="btn" href="/2016-02-15-linux-ssh-mingling/#more" rel="contents">阅读全文 &raquo;</a></div></div><div></div><div></div><footer class="post-footer"><div class="post-eof"></div></footer></article><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> <a class="post-title-link" href="/2016-02-15-meiguodianying/" itemprop="url">谈谈美国电影</a></h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-02-15T22:00:06+08:00" content="2016-02-15">2016-02-15</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/慢生活/" itemprop="url" rel="index"><span itemprop="name">慢生活</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-02-15-meiguodianying/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-02-15-meiguodianying/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><p>记得在大学时候还经常看美国电影，那时候英语老师鼓励我们看美国电影学口语，上课的时候也经常放经典的美国电影，追随过每周更新一次的越狱，但自从毕业工作后就很少在看美国电影了，也许是美国电影一般都很长，也许是环境所致，在厂子里都看电视剧打发时间，慢慢自己也随波逐流的消沉了，2015年我人生的一个转折点，习惯了从厂子里一日三餐的倒班生活，2015年5月辞职从另外一个厂子作为跳板顺利进入曾经毕业时从事的网络工作。</p><div class="post-more-link text-center"> <a class="btn" href="/2016-02-15-meiguodianying/#more" rel="contents">阅读全文 &raquo;</a></div></div><div></div><div></div><footer class="post-footer"><div class="post-eof"></div></footer></article><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> <a class="post-title-link" href="/2016-02-15-20hourstudy/" itemprop="url">Josh Kaufman：20小时学习法则(The First 20 Hours)</a></h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-02-15T21:58:28+08:00" content="2016-02-15">2016-02-15</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/学无止境/" itemprop="url" rel="index"><span itemprop="name">学无止境</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-02-15-20hourstudy/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-02-15-20hourstudy/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><p>Josh Kaufman：20小时学习法则(The First 20 Hours)</p><embed class="edui-faked-video" src="http://player.youku.com/player.php/sid/XNzk1NDc1OTY0/v.swf" type="application/x-shockwave-flash" width="620" height="480"></div><div></div><div></div><footer class="post-footer"><div class="post-eof"></div></footer></article><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> <a class="post-title-link" href="/2016-02-15-gonggaobuzhenzhu/" itemprop="url">枪打出头鸟，功高不震主</a></h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-02-15T21:57:39+08:00" content="2016-02-15">2016-02-15</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/慢生活/" itemprop="url" rel="index"><span itemprop="name">慢生活</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-02-15-gonggaobuzhenzhu/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-02-15-gonggaobuzhenzhu/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><p>有位人生专家说过,人一生中能够确立自身根基的事不外乎两件：一件是做人，一件是处世。低调做人，高标处世。在行为上低调：免得枪打出头鸟，功高不震主，在行为上莫出风头才大不气粗，势大不欺人学会以谦卑的姿态示人，勿因得意忘形惹祸端，弯腰致意不会影响你的身高，降低身段立世，夹着尾巴做人。</p><div class="post-more-link text-center"> <a class="btn" href="/2016-02-15-gonggaobuzhenzhu/#more" rel="contents">阅读全文 &raquo;</a></div></div><div></div><div></div><footer class="post-footer"><div class="post-eof"></div></footer></article><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> <a class="post-title-link" href="/2016-02-15-googlexianshi/" itemprop="url">如何解决谷歌联盟广告不显示问题</a></h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-02-15T21:56:24+08:00" content="2016-02-15">2016-02-15</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/学无止境/" itemprop="url" rel="index"><span itemprop="name">学无止境</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-02-15-googlexianshi/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-02-15-googlexianshi/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><p>目前国内主流的广告联盟有百度联盟，搜狗联盟，好搜联盟是中小型网站收入的首选，由于谷歌的服务器搬回美国，导致一大批网站没法做谷歌广告。对于国内网站来说，无非是一大损失，好不容易通过代理注册了谷歌联盟的账号，挂上了谷歌联盟的广告，却发现广告位一直显示空白，我之前就一直被这困惑着，而且谷歌官方也不正式说明。</p><div class="post-more-link text-center"> <a class="btn" href="/2016-02-15-googlexianshi/#more" rel="contents">阅读全文 &raquo;</a></div></div><div></div><div></div><footer class="post-footer"><div class="post-eof"></div></footer></article><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> <a class="post-title-link" href="/2016-02-15-zhouhongyi-hunrizi/" itemprop="url">周鸿祎：给那些仍旧在公司混日子的人</a></h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-02-15T21:55:33+08:00" content="2016-02-15">2016-02-15</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/慢生活/" itemprop="url" rel="index"><span itemprop="name">慢生活</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-02-15-zhouhongyi-hunrizi/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-02-15-zhouhongyi-hunrizi/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><p>公司里混日子的人，最终伤害的是自己！你混日子，就是日子混你，你自己是输家。</p><div class="post-more-link text-center"> <a class="btn" href="/2016-02-15-zhouhongyi-hunrizi/#more" rel="contents">阅读全文 &raquo;</a></div></div><div></div><div></div><footer class="post-footer"><div class="post-eof"></div></footer></article><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> <a class="post-title-link" href="/2016-02-15-chengxuyuanzhuangtai/" itemprop="url">程序员的几种状态</a></h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-02-15T21:54:13+08:00" content="2016-02-15">2016-02-15</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/慢生活/" itemprop="url" rel="index"><span itemprop="name">慢生活</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-02-15-chengxuyuanzhuangtai/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-02-15-chengxuyuanzhuangtai/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><p>程序员在找Bug 中！</p><div class="post-more-link text-center"> <a class="btn" href="/2016-02-15-chengxuyuanzhuangtai/#more" rel="contents">阅读全文 &raquo;</a></div></div><div></div><div></div><footer class="post-footer"><div class="post-eof"></div></footer></article><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> <a class="post-title-link" href="/2016-02-15-diandijiqiao/" itemprop="url">网络操作技巧点滴积累</a></h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-02-15T21:53:15+08:00" content="2016-02-15">2016-02-15</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/学无止境/" itemprop="url" rel="index"><span itemprop="name">学无止境</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-02-15-diandijiqiao/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-02-15-diandijiqiao/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><p>电脑操作上的小技巧，会者不难</p><div class="post-more-link text-center"> <a class="btn" href="/2016-02-15-diandijiqiao/#more" rel="contents">阅读全文 &raquo;</a></div></div><div></div><div></div><footer class="post-footer"><div class="post-eof"></div></footer></article><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> <a class="post-title-link" href="/2016-02-15-tuijian-web/" itemprop="url">给程序员推荐几个网站</a></h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-02-15T21:52:36+08:00" content="2016-02-15">2016-02-15</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/学无止境/" itemprop="url" rel="index"><span itemprop="name">学无止境</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-02-15-tuijian-web/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-02-15-tuijian-web/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><p>写写代码，看看人生！</p><div class="post-more-link text-center"> <a class="btn" href="/2016-02-15-tuijian-web/#more" rel="contents">阅读全文 &raquo;</a></div></div><div></div><div></div><footer class="post-footer"><div class="post-eof"></div></footer></article><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> <a class="post-title-link" href="/2016-02-15-shuxuezhimei/" itemprop="url">谈谈数学之美</a></h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-02-15T21:51:46+08:00" content="2016-02-15">2016-02-15</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/慢生活/" itemprop="url" rel="index"><span itemprop="name">慢生活</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-02-15-shuxuezhimei/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-02-15-shuxuezhimei/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><p>现在的老板想搞教育这块，想从提高学生思维入手，那天正好让我也去听听我们要搞什么样的课程，老板说到了数学的美，突然就想到了大学时数科院孟院长，他是个非常有意思的“老头”（敬语），他那时给我们即将毕业的学生叫门课，当时都想一院之长的课，的是多门高深玄奥的课，没想到孟院长就大谈数学之美，数学的奥秘啥的，当时也不明白院长跟我们讲这个有什么用，现 在老板又谈起数学之美，关键是培训学生的兴趣，启发学生的思维，说教育的本质是启发思维，这时我就想我上了这么年的学，到现在已经而立之年，才醒悟思维的重要性，但人生每个阶段对于学习的思维走过来也深有感触，对于我们这一代80后教育处处是花钱，现在的孩子一拉就是免费义务教育，小学阶段稀里糊涂的就过去了，印象中光打篮球调皮中划过，初中阶段由于小学的学习差，到了初中就被调到了最后一排，学习更是白搭，但当时受老爸影响，深深感觉父母的不容易，后发愤图强考入高中，现在反思，初中最关键的是死记硬背，多做题，把题做说遍就能考高分，当时的数学老师讲课铿锵有力很有激情，把卷子反反复复做就能出成绩，到了高中我这种就立马就不适应了，高中关键是领会做题的技巧，不是题做的越多越出效果，而是从一道题中举一反三，一路下来处处被动，如今如果从小就有数学思维的启发，是否能应对应试教育的负担，可以从公司开的辅导班中发觉感悟了。</p><div class="post-more-link text-center"> <a class="btn" href="/2016-02-15-shuxuezhimei/#more" rel="contents">阅读全文 &raquo;</a></div></div><div></div><div></div><footer class="post-footer"><div class="post-eof"></div></footer></article></section><nav class="pagination"><a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a> <a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a></nav></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><section class="site-overview sidebar-panel sidebar-panel-active"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="http://liuxinggang.com/avatar.jpg" alt="刘兴刚"><p class="site-author-name" itemprop="name">刘兴刚</p><p class="site-description motion-element" itemprop="description"></p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"> <a href="/archives"><span class="site-state-item-count">72</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories"><span class="site-state-item-count">6</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags"><span class="site-state-item-count">4</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="links-of-author motion-element"></div><div class="links-of-blogroll motion-element links-of-blogroll-inline"><div class="links-of-blogroll-title"><i class="fa fa-fw fa-globe"></i> Links</div><ul class="links-of-blogroll-list"><li class="links-of-blogroll-item"> <a href="http://liuxinggang.com/zuoxi" title="个人作息" target="_blank">个人作息</a></li><li class="links-of-blogroll-item"> <a href="http://liuxinggang.com/radio" title="音乐电台" target="_blank">音乐电台</a></li><li class="links-of-blogroll-item"> <a href="http://www.neilren.com/" title="任霏博客" target="_blank">任霏博客</a></li><li class="links-of-blogroll-item"> <a href="http://blog.gt520.com/" title="叶雨梧桐BLOG" target="_blank">叶雨梧桐BLOG</a></li><li class="links-of-blogroll-item"> <a href="http://tianzqn.com/" title="天中青年" target="_blank">天中青年</a></li><li class="links-of-blogroll-item"> <a href="https://www.freemindworld.com/blog/" title="李凡希的Blog" target="_blank">李凡希的Blog</a></li><li class="links-of-blogroll-item"> <a href="http://woshilijie.com/" title="李洁博客" target="_blank">李洁博客</a></li><li class="links-of-blogroll-item"> <a href="http://suyuening.com/" title="苏岳宁博客" target="_blank">苏岳宁博客</a></li><li class="links-of-blogroll-item"> <a href="http://www.siryin.com/" title="尹先生" target="_blank">尹先生</a></li><li class="links-of-blogroll-item"> <a href="http://www.neurallinker.com/" title="御坂网络" target="_blank">御坂网络</a></li><li class="links-of-blogroll-item"> <a href="http://www.qs5.org/" title="青石坞" target="_blank">青石坞</a></li></ul></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright"> &copy; <span itemprop="copyrightYear">2017</span><span class="with-love"><i class="fa fa-heart"></i></span> <span class="author" itemprop="copyrightHolder">刘兴刚</span></div><div class="powered-by"> 由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动</div><div class="theme-info"> 主题 - <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div><div class="busuanzi-count"><script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span><span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script><script type="text/javascript">var duoshuoQuery={short_name:"liuxinggangsu"};!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.id="duoshuo-script",t.src=("https:"==document.location.protocol?"https:":"http:")+"//static.duoshuo.com/embed.js",t.charset="UTF-8",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(t)}()</script></body></html>
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="刘兴刚" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="刘兴刚博客">
+<meta property="og:url" content="http://liuxinggang.com/page/7/index.html">
+<meta property="og:site_name" content="刘兴刚博客">
+<meta property="og:locale" content="zh-Hans">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="刘兴刚博客">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://liuxinggang.com/page/7/"/>
+
+  <title> 刘兴刚博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ec066409d099697c71312c595dd643cc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">刘兴刚博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">关注Web开发,记录自己成长点滴</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'R4PcZp6HShaABXQ7QdsT','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016-02-15-linux-ssh-mingling/" itemprop="url">
+                  Linux下SSH常用命令
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-15T22:01:00+08:00" content="2016-02-15">
+              2016-02-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux平台/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux平台</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-02-15-linux-ssh-mingling/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-02-15-linux-ssh-mingling/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>用linux的VPS，不学些linux命令怎么行，下面这些，记下了，基本上就能操作linxu的web VPS了。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-02-15-linux-ssh-mingling/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016-02-15-meiguodianying/" itemprop="url">
+                  谈谈美国电影
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-15T22:00:06+08:00" content="2016-02-15">
+              2016-02-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/慢生活/" itemprop="url" rel="index">
+                    <span itemprop="name">慢生活</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-02-15-meiguodianying/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-02-15-meiguodianying/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>记得在大学时候还经常看美国电影，那时候英语老师鼓励我们看美国电影学口语，上课的时候也经常放经典的美国电影，追随过每周更新一次的越狱，但自从毕业工作后就很少在看美国电影了，也许是美国电影一般都很长，也许是环境所致，在厂子里都看电视剧打发时间，慢慢自己也随波逐流的消沉了，2015年我人生的一个转折点，习惯了从厂子里一日三餐的倒班生活，2015年5月辞职从另外一个厂子作为跳板顺利进入曾经毕业时从事的网络工作。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-02-15-meiguodianying/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016-02-15-20hourstudy/" itemprop="url">
+                  Josh Kaufman：20小时学习法则(The First 20 Hours)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-15T21:58:28+08:00" content="2016-02-15">
+              2016-02-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学无止境/" itemprop="url" rel="index">
+                    <span itemprop="name">学无止境</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-02-15-20hourstudy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-02-15-20hourstudy/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Josh Kaufman：20小时学习法则(The First 20 Hours)</p>
+<embed class="edui-faked-video" src="http://player.youku.com/player.php/sid/XNzk1NDc1OTY0/v.swf" type="application/x-shockwave-flash" width="620" height="480">
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016-02-15-gonggaobuzhenzhu/" itemprop="url">
+                  枪打出头鸟，功高不震主
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-15T21:57:39+08:00" content="2016-02-15">
+              2016-02-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/慢生活/" itemprop="url" rel="index">
+                    <span itemprop="name">慢生活</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-02-15-gonggaobuzhenzhu/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-02-15-gonggaobuzhenzhu/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>有位人生专家说过,人一生中能够确立自身根基的事不外乎两件：一件是做人，一件是处世。低调做人，高标处世。在行为上低调：免得枪打出头鸟，功高不震主，在行为上莫出风头才大不气粗，势大不欺人学会以谦卑的姿态示人，勿因得意忘形惹祸端，弯腰致意不会影响你的身高，降低身段立世，夹着尾巴做人。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-02-15-gonggaobuzhenzhu/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016-02-15-googlexianshi/" itemprop="url">
+                  如何解决谷歌联盟广告不显示问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-15T21:56:24+08:00" content="2016-02-15">
+              2016-02-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学无止境/" itemprop="url" rel="index">
+                    <span itemprop="name">学无止境</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-02-15-googlexianshi/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-02-15-googlexianshi/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>目前国内主流的广告联盟有百度联盟，搜狗联盟，好搜联盟是中小型网站收入的首选，由于谷歌的服务器搬回美国，导致一大批网站没法做谷歌广告。对于国内网站来说，无非是一大损失，好不容易通过代理注册了谷歌联盟的账号，挂上了谷歌联盟的广告，却发现广告位一直显示空白，我之前就一直被这困惑着，而且谷歌官方也不正式说明。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-02-15-googlexianshi/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016-02-15-zhouhongyi-hunrizi/" itemprop="url">
+                  周鸿祎：给那些仍旧在公司混日子的人
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-15T21:55:33+08:00" content="2016-02-15">
+              2016-02-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/慢生活/" itemprop="url" rel="index">
+                    <span itemprop="name">慢生活</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-02-15-zhouhongyi-hunrizi/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-02-15-zhouhongyi-hunrizi/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>公司里混日子的人，最终伤害的是自己！你混日子，就是日子混你，你自己是输家。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-02-15-zhouhongyi-hunrizi/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016-02-15-chengxuyuanzhuangtai/" itemprop="url">
+                  程序员的几种状态
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-15T21:54:13+08:00" content="2016-02-15">
+              2016-02-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/慢生活/" itemprop="url" rel="index">
+                    <span itemprop="name">慢生活</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-02-15-chengxuyuanzhuangtai/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-02-15-chengxuyuanzhuangtai/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>程序员在找Bug 中！
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-02-15-chengxuyuanzhuangtai/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016-02-15-diandijiqiao/" itemprop="url">
+                  网络操作技巧点滴积累
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-15T21:53:15+08:00" content="2016-02-15">
+              2016-02-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学无止境/" itemprop="url" rel="index">
+                    <span itemprop="name">学无止境</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-02-15-diandijiqiao/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-02-15-diandijiqiao/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>电脑操作上的小技巧，会者不难
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-02-15-diandijiqiao/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016-02-15-tuijian-web/" itemprop="url">
+                  给程序员推荐几个网站
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-15T21:52:36+08:00" content="2016-02-15">
+              2016-02-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学无止境/" itemprop="url" rel="index">
+                    <span itemprop="name">学无止境</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-02-15-tuijian-web/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-02-15-tuijian-web/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>写写代码，看看人生！
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-02-15-tuijian-web/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016-02-15-shuxuezhimei/" itemprop="url">
+                  谈谈数学之美
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-15T21:51:46+08:00" content="2016-02-15">
+              2016-02-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/慢生活/" itemprop="url" rel="index">
+                    <span itemprop="name">慢生活</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-02-15-shuxuezhimei/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-02-15-shuxuezhimei/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>现在的老板想搞教育这块，想从提高学生思维入手，那天正好让我也去听听我们要搞什么样的课程，老板说到了数学的美，突然就想到了大学时数科院孟院长，他是个非常有意思的“老头”（敬语），他那时给我们即将毕业的学生叫门课，当时都想一院之长的课，的是多门高深玄奥的课，没想到孟院长就大谈数学之美，数学的奥秘啥的，当时也不明白院长跟我们讲这个有什么用，现 在老板又谈起数学之美，关键是培训学生的兴趣，启发学生的思维，说教育的本质是启发思维，这时我就想我上了这么年的学，到现在已经而立之年，才醒悟思维的重要性，但人生每个阶段对于学习的思维走过来也深有感触，对于我们这一代80后教育处处是花钱，现在的孩子一拉就是免费义务教育，小学阶段稀里糊涂的就过去了，印象中光打篮球调皮中划过，初中阶段由于小学的学习差，到了初中就被调到了最后一排，学习更是白搭，但当时受老爸影响，深深感觉父母的不容易，后发愤图强考入高中，现在反思，初中最关键的是死记硬背，多做题，把题做说遍就能考高分，当时的数学老师讲课铿锵有力很有激情，把卷子反反复复做就能出成绩，到了高中我这种就立马就不适应了，高中关键是领会做题的技巧，不是题做的越多越出效果，而是从一道题中举一反三，一路下来处处被动，如今如果从小就有数学思维的启发，是否能应对应试教育的负担，可以从公司开的辅导班中发觉感悟了。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-02-15-shuxuezhimei/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  	
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://liuxinggang.com/avatar.jpg"
+               alt="刘兴刚" />
+          <p class="site-author-name" itemprop="name">刘兴刚</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">72</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://liuxinggang.com/zuoxi" title="个人作息" target="_blank">个人作息</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://liuxinggang.com/radio" title="音乐电台" target="_blank">音乐电台</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.neilren.com/" title="任霏博客" target="_blank">任霏博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.gt520.com/" title="叶雨梧桐BLOG" target="_blank">叶雨梧桐BLOG</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://tianzqn.com/" title="天中青年" target="_blank">天中青年</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.freemindworld.com/blog/" title="李凡希的Blog" target="_blank">李凡希的Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://woshilijie.com/" title="李洁博客" target="_blank">李洁博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://suyuening.com/" title="苏岳宁博客" target="_blank">苏岳宁博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.siryin.com/" title="尹先生" target="_blank">尹先生</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.neurallinker.com/" title="御坂网络" target="_blank">御坂网络</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qs5.org/" title="青石坞" target="_blank">青石坞</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘兴刚</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"liuxinggangsu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

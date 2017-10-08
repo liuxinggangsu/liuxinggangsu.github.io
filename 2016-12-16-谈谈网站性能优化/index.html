@@ -1,1 +1,715 @@
-<!doctype html><html class="theme-next pisces use-motion"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="//fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css"><link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css"><link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css"><meta name="keywords" content="Hexo,"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1"><meta name="description" content="对于网站的搭建变的越来越简单，搭建好后前期访问最多的主要还是自己贡献流量，如果网站打开慢自己都感觉再浪费时间，别说网站客户会停留了，所以对于网站性能的优化还是非常必要的，加上像我们这种小白买的vps带宽毕竟有限，想着充分发挥服务器的性能，所以节省带宽流量也是的考虑的，当然网站优化的好，百度的排名肯定也是加分的，记得前年也做个电子商城的优化，就按百度上没有思路的弄过，效果一般，今天正好有空屡屡思路，"><meta name="keywords" content="Hexo"><meta property="og:type" content="article"><meta property="og:title" content="谈谈网站性能优化"><meta property="og:url" content="http://liuxinggang.com/2016-12-16-谈谈网站性能优化/index.html"><meta property="og:site_name" content="刘兴刚博客"><meta property="og:description" content="对于网站的搭建变的越来越简单，搭建好后前期访问最多的主要还是自己贡献流量，如果网站打开慢自己都感觉再浪费时间，别说网站客户会停留了，所以对于网站性能的优化还是非常必要的，加上像我们这种小白买的vps带宽毕竟有限，想着充分发挥服务器的性能，所以节省带宽流量也是的考虑的，当然网站优化的好，百度的排名肯定也是加分的，记得前年也做个电子商城的优化，就按百度上没有思路的弄过，效果一般，今天正好有空屡屡思路，"><meta property="og:locale" content="zh-Hans"><meta property="og:updated_time" content="2017-01-23T00:33:04.000Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="谈谈网站性能优化"><meta name="twitter:description" content="对于网站的搭建变的越来越简单，搭建好后前期访问最多的主要还是自己贡献流量，如果网站打开慢自己都感觉再浪费时间，别说网站客户会停留了，所以对于网站性能的优化还是非常必要的，加上像我们这种小白买的vps带宽毕竟有限，想着充分发挥服务器的性能，所以节省带宽流量也是的考虑的，当然网站优化的好，百度的排名肯定也是加分的，记得前年也做个电子商城的优化，就按百度上没有思路的弄过，效果一般，今天正好有空屡屡思路，"><script type="text/javascript" id="hexo.configuration">var NexT=window.NexT||{},CONFIG={scheme:"Pisces",sidebar:{position:"left",display:"post"},fancybox:!0,motion:!0,duoshuo:{userId:0,author:"博主"}}</script><link rel="canonical" href="http://liuxinggang.com/2016-12-16-谈谈网站性能优化/"><title> 谈谈网站性能优化 | 刘兴刚博客</title></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans"><script type="text/javascript">var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="//hm.baidu.com/hm.js?ec066409d099697c71312c595dd643cc";var c=document.getElementsByTagName("script")[0];c.parentNode.insertBefore(e,c)}()</script><div class="container one-collumn sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">刘兴刚博客</span><span class="logo-line-after"><i></i></span></a></div><p class="site-subtitle">关注Web开发,记录自己成长点滴</p></div><div class="site-nav-toggle"> <button><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br> 首页</a></li><li class="menu-item menu-item-categories"><a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br> 分类</a></li><li class="menu-item menu-item-about"><a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br> 关于</a></li><li class="menu-item menu-item-archives"><a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br> 归档</a></li><li class="menu-item menu-item-tags"><a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br> 标签</a></li><li class="menu-item menu-item-search"><a href="#" class="st-search-show-outputs"><i class="menu-item-icon fa fa-search fa-fw"></i><br> 搜索</a></li></ul><div class="site-search"><form class="site-search-form"> <input type="text" id="st-search-input" class="st-search-input st-default-search-input"></form><script type="text/javascript">!function(t,e,s,n,c,i,a){t.SwiftypeObject=c,t[c]=t[c]||function(){(t[c].q=t[c].q||[]).push(arguments)},i=e.createElement(s),a=e.getElementsByTagName(s)[0],i.async=1,i.src="//s.swiftypecdn.com/install/v2/st.js",a.parentNode.insertBefore(i,a)}(window,document,"script",0,"_st"),_st("install","R4PcZp6HShaABXQ7QdsT","2.0.0")</script></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> 谈谈网站性能优化</h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-12-16T13:10:13+08:00" content="2016-12-16">2016-12-16</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/WEB开发/" itemprop="url" rel="index"><span itemprop="name">WEB开发</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-12-16-谈谈网站性能优化/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-12-16-谈谈网站性能优化/" itemprop="commentsCount"></span></a></span> &nbsp; | &nbsp; <span class="page-pv">本文阅读量<span class="busuanzi-value" id="busuanzi_value_page_pv"></span> 次</span></div></header><div class="post-body" itemprop="articleBody"><p>对于网站的搭建变的越来越简单，搭建好后前期访问最多的主要还是自己贡献流量，如果网站打开慢自己都感觉再浪费时间，别说网站客户会停留了，所以对于网站性能的优化还是非常必要的，加上像我们这种小白买的vps带宽毕竟有限，想着充分发挥服务器的性能，所以节省带宽流量也是的考虑的，当然网站优化的好，百度的排名肯定也是加分的，记得前年也做个电子商城的优化，就按百度上没有思路的弄过，效果一般，今天正好有空屡屡思路，把遇到的坑一个个解决掉。<br>对于本博客通过gulp对css、js、html、img都做过压缩，虽然用的国外空间，速度自己还能接受，但当时做完这些以后，一直耿耿于怀没有合并css、js，当然gulp合并也是非常简单，但修改hexo却是复杂一些，就没折腾，最近在弄企业网站的优化，合并css、js是必须的，并经这些东西一般网站搭建好后不再有大的变动，所以缓存这些文件也是必须的。下面主要是记录我优化企业网站性能遇到的坑。<a id="more"></a></p><h2 id="一劳永逸神器，使用Minify来优化网站性能。"><a href="#一劳永逸神器，使用Minify来优化网站性能。" class="headerlink" title="一劳永逸神器，使用Minify来优化网站性能。"></a>一劳永逸神器，使用Minify来优化网站性能。</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Minify 是用PHP5开发的应用，通过遵循一些Yahoo的优化规则来提高网站的性能。它会合并多个CSS或者JavaScript文件，</div><div class="line">移除一些不必要的空格和注释，进行gzip压缩，并且会设置浏览器的缓存头。Minify 在设计上和Yahoo的Combo Handler Service非常像，</div><div class="line">不过Minify可以合并任何你想要合并的JavaScript和CSS文件。</div></pre></td></tr></table></figure><p>可以说这个东东正好是我上面想要实现的所有功能了，操作起来也是非常简单，下载解压后，拷贝 “min” 文件夹到自己网站的DOCUMENT_ROOT下，引用地址写成<br>/min/?b=css&amp;f=test.css<br>而不是<br>/min/b=css&amp;f=test.css 这样写需要服务器支持urlrewrite，如何让服务器支持rewrite呢，我从网上找的方法似乎对于我的服务器都不管用，虽然win 2003官方已经停止更新，对于跟xp使用习惯爱好一样，我的服务器我还是装了2003，毕竟服务器配置一般。</p><h2 id="下面介绍下win2003如何支持rewrite："><a href="#下面介绍下win2003如何支持rewrite：" class="headerlink" title="下面介绍下win2003如何支持rewrite："></a>下面介绍下win2003如何支持rewrite：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">一、安装：</div><div class="line">1、从官网下载完全版ISAPI_Rewrite3（http://www.helicontech.com/download/isapi_rewrite/ISAPI_Rewrite3_0073.msi）并安装；</div><div class="line"></div><div class="line">2、将Rewrite破解文件夹中的ISAPI_Rewrite.dll文件覆盖到程序安装目录下替换即可；</div><div class="line"></div><div class="line">3、打开安装目录下的httpd.conf文件，在里面输入以下内容并保存，这样就没有使用天数的限制了；</div><div class="line">RegistrationName= wlqcwin</div><div class="line">RegistrationCode= 2EAD-35GH-66NN-ZYBA</div><div class="line"></div><div class="line">4、安装好后记得给ISAPI_Rewrite3软件安装目录network service的读权限，否则会出现无法加载ISAPI_Rewrite的错误。</div></pre></td></tr></table></figure><p>以上操作完以后，我删除了iis-》网站-》属性ISAPI筛选器中自动生成的ISAPI_Rewrite，在我自己的网站上右击属性添加ISAPI_Rewrite，重启iis后，网上介绍的网站的ISAPI_Rewrite变绿，而我的没有变绿，刚才删除的所有网站的ISAPI筛选是绿的，但此时ISAPI_Rewrite3.0没有生效，直接在网站目录上面添加IIS_WPG组读权限即可，我为纠结网站筛选器变绿重启了N遍IIS，网站支持不支持rewrite根本和这个没关系，我就是把所有网站的筛选器删除了，也是支持rewrite的。<br>同时网上绝大多数说如果是linux服务器就在网站根目录下放个.htaccess,win服务器网站根目录下放个httpd.ini（里面为伪静态规则），当然对于linux服务器应该是没啥问题，不过对于win服务器，有可能会遇到一些问题，可以选择在ISAPI_Rewrite3的安装目录下的httpd.conf中添加伪静态规则，不过这是对服务器中所有网站都应用这个伪静态规则，很容易让其他网站运行有问题。<br>写着写着就破题了，继续介绍minify</p><h2 id="修改配置文件（min目录下config-php）："><a href="#修改配置文件（min目录下config-php）：" class="headerlink" title="修改配置文件（min目录下config.php）："></a>修改配置文件（min目录下config.php）：</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"><span class="comment">//默认为false，设置为true后可以开启Web视图获取url</span></div><div class="line">$min_enableBuilder = <span class="literal">true</span>;</div><div class="line">![web视图获取url](<span class="regexp">/uploads/</span><span class="number">2016</span>/<span class="number">12</span>/demo1.jpg) </div><div class="line"><span class="comment">//Web视图登陆密码，用户名为admin</span></div><div class="line">$min_builderPassword = <span class="string">'123456'</span>;</div><div class="line"> </div><div class="line"><span class="comment">//安装时的根目录，例如/www为网站目录，min目录在/www/min下</span></div><div class="line">$min_documentRoot = $_SERVER[<span class="string">'DOCUMENT_ROOT'</span>];</div><div class="line"> </div><div class="line"><span class="comment">//调试模式</span></div><div class="line">$min_allowDebugFlag = <span class="literal">false</span>;</div><div class="line"> </div><div class="line"><span class="comment">//min程序生成缓存的目录，可以启用更快的APC或memcached或redis </span></div><div class="line">$min_cachePath = <span class="string">'/tmp'</span>; <span class="comment">//linux服务器可以这样指定到网站根目录下的tmp文件夹，</span></div><div class="line">windows服务器必须改成dirname(__FILE__) .<span class="string">'/tmp'</span>（tmp文件夹在min的目录下面）或者$min_cachePath = <span class="string">'d:\\wwwroot\\tmp'</span>（tmp文件夹位置可以不用必须在min文件夹下面了）;</div><div class="line"></div><div class="line"><span class="comment">//设置过期时间，单位s。注意：nginx或apache设置过期时间在minify中将失效，以该参数为准</span></div><div class="line"><span class="comment">//minify支持url后带上参数设置过期时间，例如：E.g. /min/f=hello.css&amp;123456 对于js、css一般没有太大变化可以缓存时间长一些。我设置为了315360000;</span></div><div class="line">$min_serveOptions[<span class="string">'maxAge'</span>] = <span class="number">1800</span>;</div></pre></td></tr></table></figure><h2 id="Web-前端优化-–-缓存页面组"><a href="#Web-前端优化-–-缓存页面组" class="headerlink" title="Web 前端优化 – 缓存页面组"></a>Web 前端优化 – 缓存页面组</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">在 Web 前端优化里，缓存页面组件是很重要的一项。不常改动的图片、CSS 、JavaScript 文件等，可以缓存在浏览器中，这样，用户再次访问时，浏览器直接从缓存中读取文件，一来减少浏览器请求数，加快用户访问速度，二来服务器需要返回的内容少了，减轻服务器负担。 </div><div class="line">缓存页面组件的方法有多种，这一种是修改 HTTP 头。 </div><div class="line">假设服务器是 Apache，可以通过配置 .htaccess 文件来启用缓存： </div><div class="line">&lt;IfModule mod_expires.c&gt;</div><div class="line">    # 启用缓存</div><div class="line">    ExpiresActive On</div><div class="line"></div><div class="line">    #默认缓存时间为 1 天</div><div class="line">    ExpiresDefault <span class="string">"access plus 1 day"</span></div><div class="line"></div><div class="line">    #图片的缓存时间设置为一周</div><div class="line">    ExpiresByType image/x-icon <span class="string">"access plus 7 days"</span></div><div class="line">    ExpiresByType image/jpeg <span class="string">"access plus 7 days"</span></div><div class="line">    ExpiresByType image/png <span class="string">"access plus 7 days"</span></div><div class="line">    ExpiresByType image/gif <span class="string">"access plus 7 days"</span></div><div class="line"></div><div class="line"></div><div class="line">    ExpiresByType application/x-shockwave-flash <span class="string">"access plus 7 days"</span></div><div class="line"></div><div class="line">    #CSS 的缓存时间也设置成一周</div><div class="line">    ExpiresByType text/css <span class="string">"access plus 7 day"</span></div><div class="line"></div><div class="line">    #Javascript 的缓存时间同样设置为一周</div><div class="line">    ExpiresByType text/javascript <span class="string">"access plus 7 day"</span></div><div class="line">    ExpiresByType application/x-javascript <span class="string">"access plus 7 day"</span></div><div class="line"></div><div class="line"></div><div class="line">    ExpiresByType text/html <span class="string">"access plus 10 minutes"</span></div><div class="line">    ExpiresByType application/xhtml+xml <span class="string">"access plus 10 minutes"</span></div><div class="line">&lt;<span class="regexp">/IfModule&gt;</span></div><div class="line"><span class="regexp">&lt;IfModule mod_headers.c&gt;</span></div><div class="line"><span class="regexp">    #设置代理缓存</span></div><div class="line"><span class="regexp">  &lt;FilesMatch "\.(js|css|xml|gz|html)$"&gt;</span></div><div class="line"><span class="regexp">    Header append Vary: Accept-Encoding</span></div><div class="line"><span class="regexp">  &lt;/</span>FilesMatch&gt;</div><div class="line">&lt;<span class="regexp">/IfModule&gt;</span></div><div class="line"><span class="regexp"></span></div><div class="line"><span class="regexp">以上配置针对不同类型文件设置不同有效期限，比如 jpeg/</span>png/gif 图片，从用户第一次访问算起，<span class="number">7</span> 天内有效，如果用户在 <span class="number">7</span> 天内还访问这个网站，则直接从浏览器缓存中读取该图片，无需服务器上再返回。 </div><div class="line">打开 firebug，启用 Net 面板，刷新页面，如果看到有返回状态码 <span class="number">304</span> Not Modified 的文件，说明设置成功。</div></pre></td></tr></table></figure><p>由于我的网站css路径太长，加上js调用的多，我就用了minify组的功能，修改groupsConfig.php<br></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">return</span> array(</div><div class="line">     <span class="string">'js'</span> =&gt; array(<span class="string">'//templates/default/js/kxbdMarquee.js'</span>,<span class="string">'//templates/default/js/jquery.kxbdsupermarquee.js'</span>),</div><div class="line">     <span class="string">'css'</span> =&gt; array(<span class="string">'//templates/default/images/css.css'</span>, <span class="string">'//templates/default/images/css_structure.css'</span>),</div><div class="line">);</div></pre></td></tr></table></figure><p></p><p>在前台只需要如下简洁调用即可。<br></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;link rel=<span class="string">"stylesheet"</span> type=<span class="string">"text/css"</span> href=<span class="string">"/min/g=css"</span> /&gt;</div><div class="line">&lt;script src=<span class="string">"/min/g=js"</span> type=<span class="string">"text/javascript"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure><p></p><p>min/builder/index.php 可以选择合并的文件进行可视化操作，但安装完毕后移动 min/builder/index.php 文件到安全位置。防止其他人访问。<br>这就是这一工具的强大之处，它不需要你再去手动压缩源码，只需要你按照最简单的方式保留一份完整的源码，它会自动帮你进行压缩，使用缓存后执行效率相当高，配合cdn加速那就更完美了。<br>使用 <a href="https://developers.google.com/speed/pagespeed/insights/" target="_blank" rel="external">Google PageSpeed 工具</a>检测了一下网站提示图片需要优化，就像本博客用gulp压缩一下图片把，不知道为什么压缩图片非常下，就安装了grunt，安装方法挺简单跟gulp差不多，关键就是一步步安装，不要颠倒了安装顺序，毕竟对这些自动化的工具主要还是使用，原理理解的少的太多了。</p><h2 id="grunt快速入门了一下："><a href="#grunt快速入门了一下：" class="headerlink" title="grunt快速入门了一下："></a>grunt快速入门了一下：</h2><p>安装 CLI：npm install -g grunt-cli<br>配置好package.json 和 Gruntfile 文件，将命令行的当前目录转到项目的根目录下，执行npm install命令安装项目依赖的库，我这里用到imagemin插件，所以如下命令<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">切换到项目文件夹，</div><div class="line"></div><div class="line">cd projectName</div><div class="line">npm install grunt-contrib-imagemin --save-dev</div></pre></td></tr></table></figure><p></p><p>接下来配置 Gruntfile.js 文件，定义优化图片大小的任务：<br></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*global module:false*/</span></div><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">grunt</span>) </span>&#123;</div><div class="line"><span class="meta">  'use strict'</span></div><div class="line">  grunt.initConfig(&#123;</div><div class="line">    imagemin: &#123;</div><div class="line">      <span class="comment">/* 压缩图片大小 */</span></div><div class="line">      dist: &#123;</div><div class="line">        options: &#123;</div><div class="line">          optimizationLevel: <span class="number">3</span> <span class="comment">// 定义 PNG 图片优化水平</span></div><div class="line">        &#125;,</div><div class="line">        files: [&#123;</div><div class="line">          expand: <span class="literal">true</span>,</div><div class="line">          cwd: <span class="string">'img/'</span>,</div><div class="line">          src: [<span class="string">'**/*.&#123;png,jpg,jpeg&#125;'</span>], <span class="comment">// 优化 img 目录下所有 png/jpg/jpeg 图片</span></div><div class="line">          dest: <span class="string">'img/'</span> <span class="comment">// 优化后的图片保存位置，覆盖旧图片，并且不作提示</span></div><div class="line">        &#125;]</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">  &#125;)</div><div class="line">  grunt.loadNpmTasks(<span class="string">'grunt-contrib-imagemin'</span>)</div><div class="line">  grunt.registerTask(<span class="string">'img'</span>, [<span class="string">'imagemin'</span>])</div><div class="line">&#125;</div></pre></td></tr></table></figure><p></p><p>运行 grunt imagemin 命令：这样就可以很好的优化一下图片了。</p></div><div></div><div></div><footer class="post-footer"><div class="post-tags"> <a href="/tags/Hexo/" rel="tag">#Hexo</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2016-12-09-不具备这些能力，你不配叫运营！/" rel="next" title="不具备这些能力，你不配叫运营！"><i class="fa fa-chevron-left"></i> 不具备这些能力，你不配叫运营！</a></div><div class="post-nav-prev post-nav-item"> <a href="/2016-12-18-Git常用操作总结/" rel="prev" title="Git常用操作总结">Git常用操作总结<i class="fa fa-chevron-right"></i></a></div></div></footer></article><div class="post-spread"></div></div></div><div class="comments" id="comments"><div class="ds-thread" data-thread-key="2016-12-16-谈谈网站性能优化/" data-title="谈谈网站性能优化" data-url="http://liuxinggang.com/2016-12-16-谈谈网站性能优化/"></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap"> 文章目录</li><li class="sidebar-nav-overview" data-target="site-overview"> 站点概览</li></ul><section class="site-overview sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="http://liuxinggang.com/avatar.jpg" alt="刘兴刚"><p class="site-author-name" itemprop="name">刘兴刚</p><p class="site-description motion-element" itemprop="description"></p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"> <a href="/archives"><span class="site-state-item-count">72</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories"><span class="site-state-item-count">6</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags"><span class="site-state-item-count">4</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="links-of-author motion-element"></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一劳永逸神器，使用Minify来优化网站性能。"><span class="nav-number">1.</span> <span class="nav-text">一劳永逸神器，使用Minify来优化网站性能。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下面介绍下win2003如何支持rewrite："><span class="nav-number">2.</span> <span class="nav-text">下面介绍下win2003如何支持rewrite：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改配置文件（min目录下config-php）："><span class="nav-number">3.</span> <span class="nav-text">修改配置文件（min目录下config.php）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web-前端优化-–-缓存页面组"><span class="nav-number">4.</span> <span class="nav-text">Web 前端优化 – 缓存页面组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grunt快速入门了一下："><span class="nav-number">5.</span> <span class="nav-text">grunt快速入门了一下：</span></a></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright"> &copy; <span itemprop="copyrightYear">2017</span><span class="with-love"><i class="fa fa-heart"></i></span> <span class="author" itemprop="copyrightHolder">刘兴刚</span></div><div class="powered-by"> 由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动</div><div class="theme-info"> 主题 - <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div><div class="busuanzi-count"><script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span><span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script><script type="text/javascript">var duoshuoQuery={short_name:"liuxinggangsu"};!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.id="duoshuo-script",t.src=("https:"==document.location.protocol?"https:":"http:")+"//static.duoshuo.com/embed.js",t.charset="UTF-8",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(t)}()</script></body></html>
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="对于网站的搭建变的越来越简单，搭建好后前期访问最多的主要还是自己贡献流量，如果网站打开慢自己都感觉再浪费时间，别说网站客户会停留了，所以对于网站性能的优化还是非常必要的，加上像我们这种小白买的vps带宽毕竟有限，想着充分发挥服务器的性能，所以节省带宽流量也是的考虑的，当然网站优化的好，百度的排名肯定也是加分的，记得前年也做个电子商城的优化，就按百度上没有思路的弄过，效果一般，今天正好有空屡屡思路，">
+<meta name="keywords" content="Hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="谈谈网站性能优化">
+<meta property="og:url" content="http://liuxinggang.com/2016-12-16-谈谈网站性能优化/index.html">
+<meta property="og:site_name" content="刘兴刚博客">
+<meta property="og:description" content="对于网站的搭建变的越来越简单，搭建好后前期访问最多的主要还是自己贡献流量，如果网站打开慢自己都感觉再浪费时间，别说网站客户会停留了，所以对于网站性能的优化还是非常必要的，加上像我们这种小白买的vps带宽毕竟有限，想着充分发挥服务器的性能，所以节省带宽流量也是的考虑的，当然网站优化的好，百度的排名肯定也是加分的，记得前年也做个电子商城的优化，就按百度上没有思路的弄过，效果一般，今天正好有空屡屡思路，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-01-23T00:33:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="谈谈网站性能优化">
+<meta name="twitter:description" content="对于网站的搭建变的越来越简单，搭建好后前期访问最多的主要还是自己贡献流量，如果网站打开慢自己都感觉再浪费时间，别说网站客户会停留了，所以对于网站性能的优化还是非常必要的，加上像我们这种小白买的vps带宽毕竟有限，想着充分发挥服务器的性能，所以节省带宽流量也是的考虑的，当然网站优化的好，百度的排名肯定也是加分的，记得前年也做个电子商城的优化，就按百度上没有思路的弄过，效果一般，今天正好有空屡屡思路，">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://liuxinggang.com/2016-12-16-谈谈网站性能优化/"/>
+
+  <title> 谈谈网站性能优化 | 刘兴刚博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ec066409d099697c71312c595dd643cc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">刘兴刚博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">关注Web开发,记录自己成长点滴</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'R4PcZp6HShaABXQ7QdsT','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                谈谈网站性能优化
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-16T13:10:13+08:00" content="2016-12-16">
+              2016-12-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/WEB开发/" itemprop="url" rel="index">
+                    <span itemprop="name">WEB开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-12-16-谈谈网站性能优化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-12-16-谈谈网站性能优化/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv">本文阅读量
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对于网站的搭建变的越来越简单，搭建好后前期访问最多的主要还是自己贡献流量，如果网站打开慢自己都感觉再浪费时间，别说网站客户会停留了，所以对于网站性能的优化还是非常必要的，加上像我们这种小白买的vps带宽毕竟有限，想着充分发挥服务器的性能，所以节省带宽流量也是的考虑的，当然网站优化的好，百度的排名肯定也是加分的，记得前年也做个电子商城的优化，就按百度上没有思路的弄过，效果一般，今天正好有空屡屡思路，把遇到的坑一个个解决掉。<br>对于本博客通过gulp对css、js、html、img都做过压缩，虽然用的国外空间，速度自己还能接受，但当时做完这些以后，一直耿耿于怀没有合并css、js，当然gulp合并也是非常简单，但修改hexo却是复杂一些，就没折腾，最近在弄企业网站的优化，合并css、js是必须的，并经这些东西一般网站搭建好后不再有大的变动，所以缓存这些文件也是必须的。下面主要是记录我优化企业网站性能遇到的坑。<a id="more"></a></p>
+<h2 id="一劳永逸神器，使用Minify来优化网站性能。"><a href="#一劳永逸神器，使用Minify来优化网站性能。" class="headerlink" title="一劳永逸神器，使用Minify来优化网站性能。"></a>一劳永逸神器，使用Minify来优化网站性能。</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Minify 是用PHP5开发的应用，通过遵循一些Yahoo的优化规则来提高网站的性能。它会合并多个CSS或者JavaScript文件，</div><div class="line">移除一些不必要的空格和注释，进行gzip压缩，并且会设置浏览器的缓存头。Minify 在设计上和Yahoo的Combo Handler Service非常像，</div><div class="line">不过Minify可以合并任何你想要合并的JavaScript和CSS文件。</div></pre></td></tr></table></figure>
+<p>可以说这个东东正好是我上面想要实现的所有功能了，操作起来也是非常简单，下载解压后，拷贝 “min” 文件夹到自己网站的DOCUMENT_ROOT下，引用地址写成<br>/min/?b=css&amp;f=test.css<br>而不是<br>/min/b=css&amp;f=test.css  这样写需要服务器支持urlrewrite，如何让服务器支持rewrite呢，我从网上找的方法似乎对于我的服务器都不管用，虽然win 2003官方已经停止更新，对于跟xp使用习惯爱好一样，我的服务器我还是装了2003，毕竟服务器配置一般。</p>
+<h2 id="下面介绍下win2003如何支持rewrite："><a href="#下面介绍下win2003如何支持rewrite：" class="headerlink" title="下面介绍下win2003如何支持rewrite："></a>下面介绍下win2003如何支持rewrite：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">一、安装：</div><div class="line">1、从官网下载完全版ISAPI_Rewrite3（http://www.helicontech.com/download/isapi_rewrite/ISAPI_Rewrite3_0073.msi）并安装；</div><div class="line"></div><div class="line">2、将Rewrite破解文件夹中的ISAPI_Rewrite.dll文件覆盖到程序安装目录下替换即可；</div><div class="line"></div><div class="line">3、打开安装目录下的httpd.conf文件，在里面输入以下内容并保存，这样就没有使用天数的限制了；</div><div class="line">RegistrationName= wlqcwin</div><div class="line">RegistrationCode= 2EAD-35GH-66NN-ZYBA</div><div class="line"></div><div class="line">4、安装好后记得给ISAPI_Rewrite3软件安装目录network service的读权限，否则会出现无法加载ISAPI_Rewrite的错误。</div></pre></td></tr></table></figure>
+<p>以上操作完以后，我删除了iis-》网站-》属性ISAPI筛选器中自动生成的ISAPI_Rewrite，在我自己的网站上右击属性添加ISAPI_Rewrite，重启iis后，网上介绍的网站的ISAPI_Rewrite变绿，而我的没有变绿，刚才删除的所有网站的ISAPI筛选是绿的，但此时ISAPI_Rewrite3.0没有生效，直接在网站目录上面添加IIS_WPG组读权限即可，我为纠结网站筛选器变绿重启了N遍IIS，网站支持不支持rewrite根本和这个没关系，我就是把所有网站的筛选器删除了，也是支持rewrite的。<br>同时网上绝大多数说如果是linux服务器就在网站根目录下放个.htaccess,win服务器网站根目录下放个httpd.ini（里面为伪静态规则），当然对于linux服务器应该是没啥问题，不过对于win服务器，有可能会遇到一些问题，可以选择在ISAPI_Rewrite3的安装目录下的httpd.conf中添加伪静态规则，不过这是对服务器中所有网站都应用这个伪静态规则，很容易让其他网站运行有问题。<br>写着写着就破题了，继续介绍minify</p>
+<h2 id="修改配置文件（min目录下config-php）："><a href="#修改配置文件（min目录下config-php）：" class="headerlink" title="修改配置文件（min目录下config.php）："></a>修改配置文件（min目录下config.php）：</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"><span class="comment">//默认为false，设置为true后可以开启Web视图获取url</span></div><div class="line">$min_enableBuilder = <span class="literal">true</span>;</div><div class="line">![web视图获取url](<span class="regexp">/uploads/</span><span class="number">2016</span>/<span class="number">12</span>/demo1.jpg) </div><div class="line"><span class="comment">//Web视图登陆密码，用户名为admin</span></div><div class="line">$min_builderPassword = <span class="string">'123456'</span>;</div><div class="line"> </div><div class="line"><span class="comment">//安装时的根目录，例如/www为网站目录，min目录在/www/min下</span></div><div class="line">$min_documentRoot = $_SERVER[<span class="string">'DOCUMENT_ROOT'</span>];</div><div class="line"> </div><div class="line"><span class="comment">//调试模式</span></div><div class="line">$min_allowDebugFlag = <span class="literal">false</span>;</div><div class="line"> </div><div class="line"><span class="comment">//min程序生成缓存的目录，可以启用更快的APC或memcached或redis </span></div><div class="line">$min_cachePath = <span class="string">'/tmp'</span>; <span class="comment">//linux服务器可以这样指定到网站根目录下的tmp文件夹，</span></div><div class="line">windows服务器必须改成dirname(__FILE__) .<span class="string">'/tmp'</span>（tmp文件夹在min的目录下面）或者$min_cachePath = <span class="string">'d:\\wwwroot\\tmp'</span>（tmp文件夹位置可以不用必须在min文件夹下面了）;</div><div class="line"></div><div class="line"><span class="comment">//设置过期时间，单位s。注意：nginx或apache设置过期时间在minify中将失效，以该参数为准</span></div><div class="line"><span class="comment">//minify支持url后带上参数设置过期时间，例如：E.g. /min/f=hello.css&amp;123456 对于js、css一般没有太大变化可以缓存时间长一些。我设置为了315360000;</span></div><div class="line">$min_serveOptions[<span class="string">'maxAge'</span>] = <span class="number">1800</span>;</div></pre></td></tr></table></figure>
+<h2 id="Web-前端优化-–-缓存页面组"><a href="#Web-前端优化-–-缓存页面组" class="headerlink" title="Web 前端优化 – 缓存页面组"></a>Web 前端优化 – 缓存页面组</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">在 Web 前端优化里，缓存页面组件是很重要的一项。不常改动的图片、CSS 、JavaScript 文件等，可以缓存在浏览器中，这样，用户再次访问时，浏览器直接从缓存中读取文件，一来减少浏览器请求数，加快用户访问速度，二来服务器需要返回的内容少了，减轻服务器负担。 </div><div class="line">缓存页面组件的方法有多种，这一种是修改 HTTP 头。 </div><div class="line">假设服务器是 Apache，可以通过配置 .htaccess 文件来启用缓存： </div><div class="line">&lt;IfModule mod_expires.c&gt;</div><div class="line">    # 启用缓存</div><div class="line">    ExpiresActive On</div><div class="line"></div><div class="line">    #默认缓存时间为 1 天</div><div class="line">    ExpiresDefault <span class="string">"access plus 1 day"</span></div><div class="line"></div><div class="line">    #图片的缓存时间设置为一周</div><div class="line">    ExpiresByType image/x-icon <span class="string">"access plus 7 days"</span></div><div class="line">    ExpiresByType image/jpeg <span class="string">"access plus 7 days"</span></div><div class="line">    ExpiresByType image/png <span class="string">"access plus 7 days"</span></div><div class="line">    ExpiresByType image/gif <span class="string">"access plus 7 days"</span></div><div class="line"></div><div class="line"></div><div class="line">    ExpiresByType application/x-shockwave-flash <span class="string">"access plus 7 days"</span></div><div class="line"></div><div class="line">    #CSS 的缓存时间也设置成一周</div><div class="line">    ExpiresByType text/css <span class="string">"access plus 7 day"</span></div><div class="line"></div><div class="line">    #Javascript 的缓存时间同样设置为一周</div><div class="line">    ExpiresByType text/javascript <span class="string">"access plus 7 day"</span></div><div class="line">    ExpiresByType application/x-javascript <span class="string">"access plus 7 day"</span></div><div class="line"></div><div class="line"></div><div class="line">    ExpiresByType text/html <span class="string">"access plus 10 minutes"</span></div><div class="line">    ExpiresByType application/xhtml+xml <span class="string">"access plus 10 minutes"</span></div><div class="line">&lt;<span class="regexp">/IfModule&gt;</span></div><div class="line"><span class="regexp">&lt;IfModule mod_headers.c&gt;</span></div><div class="line"><span class="regexp">    #设置代理缓存</span></div><div class="line"><span class="regexp">  &lt;FilesMatch "\.(js|css|xml|gz|html)$"&gt;</span></div><div class="line"><span class="regexp">    Header append Vary: Accept-Encoding</span></div><div class="line"><span class="regexp">  &lt;/</span>FilesMatch&gt;</div><div class="line">&lt;<span class="regexp">/IfModule&gt;</span></div><div class="line"><span class="regexp"></span></div><div class="line"><span class="regexp">以上配置针对不同类型文件设置不同有效期限，比如 jpeg/</span>png/gif 图片，从用户第一次访问算起，<span class="number">7</span> 天内有效，如果用户在 <span class="number">7</span> 天内还访问这个网站，则直接从浏览器缓存中读取该图片，无需服务器上再返回。 </div><div class="line">打开 firebug，启用 Net 面板，刷新页面，如果看到有返回状态码 <span class="number">304</span> Not Modified 的文件，说明设置成功。</div></pre></td></tr></table></figure>
+<p>由于我的网站css路径太长，加上js调用的多，我就用了minify组的功能，修改groupsConfig.php<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">return</span> array(</div><div class="line">     <span class="string">'js'</span> =&gt; array(<span class="string">'//templates/default/js/kxbdMarquee.js'</span>,<span class="string">'//templates/default/js/jquery.kxbdsupermarquee.js'</span>),</div><div class="line">     <span class="string">'css'</span> =&gt; array(<span class="string">'//templates/default/images/css.css'</span>, <span class="string">'//templates/default/images/css_structure.css'</span>),</div><div class="line">);</div></pre></td></tr></table></figure></p>
+<p>在前台只需要如下简洁调用即可。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;link rel=<span class="string">"stylesheet"</span> type=<span class="string">"text/css"</span> href=<span class="string">"/min/g=css"</span> /&gt;</div><div class="line">&lt;script src=<span class="string">"/min/g=js"</span> type=<span class="string">"text/javascript"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>min/builder/index.php 可以选择合并的文件进行可视化操作，但安装完毕后移动 min/builder/index.php 文件到安全位置。防止其他人访问。<br>这就是这一工具的强大之处，它不需要你再去手动压缩源码，只需要你按照最简单的方式保留一份完整的源码，它会自动帮你进行压缩，使用缓存后执行效率相当高，配合cdn加速那就更完美了。<br>使用 <a href="https://developers.google.com/speed/pagespeed/insights/" target="_blank" rel="external">Google PageSpeed 工具</a>检测了一下网站提示图片需要优化，就像本博客用gulp压缩一下图片把，不知道为什么压缩图片非常下，就安装了grunt，安装方法挺简单跟gulp差不多，关键就是一步步安装，不要颠倒了安装顺序，毕竟对这些自动化的工具主要还是使用，原理理解的少的太多了。</p>
+<h2 id="grunt快速入门了一下："><a href="#grunt快速入门了一下：" class="headerlink" title="grunt快速入门了一下："></a>grunt快速入门了一下：</h2><p>安装 CLI：npm install -g grunt-cli<br>配置好package.json 和 Gruntfile 文件，将命令行的当前目录转到项目的根目录下，执行npm install命令安装项目依赖的库，我这里用到imagemin插件，所以如下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">切换到项目文件夹，</div><div class="line"></div><div class="line">cd projectName</div><div class="line">npm install grunt-contrib-imagemin --save-dev</div></pre></td></tr></table></figure></p>
+<p>接下来配置 Gruntfile.js 文件，定义优化图片大小的任务：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*global module:false*/</span></div><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">grunt</span>) </span>&#123;</div><div class="line"><span class="meta">  'use strict'</span></div><div class="line">  grunt.initConfig(&#123;</div><div class="line">    imagemin: &#123;</div><div class="line">      <span class="comment">/* 压缩图片大小 */</span></div><div class="line">      dist: &#123;</div><div class="line">        options: &#123;</div><div class="line">          optimizationLevel: <span class="number">3</span> <span class="comment">// 定义 PNG 图片优化水平</span></div><div class="line">        &#125;,</div><div class="line">        files: [&#123;</div><div class="line">          expand: <span class="literal">true</span>,</div><div class="line">          cwd: <span class="string">'img/'</span>,</div><div class="line">          src: [<span class="string">'**/*.&#123;png,jpg,jpeg&#125;'</span>], <span class="comment">// 优化 img 目录下所有 png/jpg/jpeg 图片</span></div><div class="line">          dest: <span class="string">'img/'</span> <span class="comment">// 优化后的图片保存位置，覆盖旧图片，并且不作提示</span></div><div class="line">        &#125;]</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">  &#125;)</div><div class="line">  grunt.loadNpmTasks(<span class="string">'grunt-contrib-imagemin'</span>)</div><div class="line">  grunt.registerTask(<span class="string">'img'</span>, [<span class="string">'imagemin'</span>])</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行 grunt imagemin 命令：这样就可以很好的优化一下图片了。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hexo/" rel="tag">#Hexo</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016-12-09-不具备这些能力，你不配叫运营！/" rel="next" title="不具备这些能力，你不配叫运营！">
+                <i class="fa fa-chevron-left"></i> 不具备这些能力，你不配叫运营！
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016-12-18-Git常用操作总结/" rel="prev" title="Git常用操作总结">
+                Git常用操作总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016-12-16-谈谈网站性能优化/"
+           data-title="谈谈网站性能优化" data-url="http://liuxinggang.com/2016-12-16-谈谈网站性能优化/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://liuxinggang.com/avatar.jpg"
+               alt="刘兴刚" />
+          <p class="site-author-name" itemprop="name">刘兴刚</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">72</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一劳永逸神器，使用Minify来优化网站性能。"><span class="nav-number">1.</span> <span class="nav-text">一劳永逸神器，使用Minify来优化网站性能。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下面介绍下win2003如何支持rewrite："><span class="nav-number">2.</span> <span class="nav-text">下面介绍下win2003如何支持rewrite：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改配置文件（min目录下config-php）："><span class="nav-number">3.</span> <span class="nav-text">修改配置文件（min目录下config.php）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web-前端优化-–-缓存页面组"><span class="nav-number">4.</span> <span class="nav-text">Web 前端优化 – 缓存页面组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grunt快速入门了一下："><span class="nav-number">5.</span> <span class="nav-text">grunt快速入门了一下：</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘兴刚</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"liuxinggangsu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

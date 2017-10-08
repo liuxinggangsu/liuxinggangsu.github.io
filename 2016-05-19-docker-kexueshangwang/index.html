@@ -1,1 +1,765 @@
-<!doctype html><html class="theme-next pisces use-motion"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="//fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css"><link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css"><link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css"><meta name="keywords" content="刘兴刚"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1"><meta name="description" content="科学上网服务可以说是捣鼓网络工作者基本都会接触到的东西，因为伟大的google迁出中国而百度的搜索结果让人很难满意，使用google搜索可以说经常的事情，虽然每天的频次不高，所以如何使用google搜索，一直在研究，从开始的修改host文件，到被一个技术男引导搭建vps上shadowsocks服务，虽说vps不贵，当初的初心也是体验一下国外vps的特色，在512m内存的vps搭建了本博客，但vps"><meta property="og:type" content="article"><meta property="og:title" content="Docker（灵雀云）2016最新免费搭建科学上网服务"><meta property="og:url" content="http://liuxinggang.com/2016-05-19-docker-kexueshangwang/index.html"><meta property="og:site_name" content="刘兴刚博客"><meta property="og:description" content="科学上网服务可以说是捣鼓网络工作者基本都会接触到的东西，因为伟大的google迁出中国而百度的搜索结果让人很难满意，使用google搜索可以说经常的事情，虽然每天的频次不高，所以如何使用google搜索，一直在研究，从开始的修改host文件，到被一个技术男引导搭建vps上shadowsocks服务，虽说vps不贵，当初的初心也是体验一下国外vps的特色，在512m内存的vps搭建了本博客，但vps"><meta property="og:locale" content="zh-Hans"><meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519125216-300x87.png"><meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519125318-300x113.png"><meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519125344-300x143.png"><meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/faa1b260a5472036-300x125.png"><meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519125835-300x116.png"><meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519125923-300x166.png"><meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/0060lm7Tgw1eyd2n6pm2dj307w08tjsc-269x300.jpg"><meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519130453-279x300.png"><meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519130642-300x181.png"><meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519131250.png"><meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519132035-169x300.jpg"><meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519132040-169x300.jpg"><meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519103008-300x85.png"><meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519103419-300x88.png"><meta property="og:updated_time" content="2016-07-06T01:57:04.000Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Docker（灵雀云）2016最新免费搭建科学上网服务"><meta name="twitter:description" content="科学上网服务可以说是捣鼓网络工作者基本都会接触到的东西，因为伟大的google迁出中国而百度的搜索结果让人很难满意，使用google搜索可以说经常的事情，虽然每天的频次不高，所以如何使用google搜索，一直在研究，从开始的修改host文件，到被一个技术男引导搭建vps上shadowsocks服务，虽说vps不贵，当初的初心也是体验一下国外vps的特色，在512m内存的vps搭建了本博客，但vps"><meta name="twitter:image" content="http://liuxinggang.com/uploads/2016/05/20160519125216-300x87.png"><script type="text/javascript" id="hexo.configuration">var NexT=window.NexT||{},CONFIG={scheme:"Pisces",sidebar:{position:"left",display:"post"},fancybox:!0,motion:!0,duoshuo:{userId:0,author:"博主"}}</script><link rel="canonical" href="http://liuxinggang.com/2016-05-19-docker-kexueshangwang/"><title> Docker（灵雀云）2016最新免费搭建科学上网服务 | 刘兴刚博客</title></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans"><script type="text/javascript">var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="//hm.baidu.com/hm.js?ec066409d099697c71312c595dd643cc";var c=document.getElementsByTagName("script")[0];c.parentNode.insertBefore(e,c)}()</script><div class="container one-collumn sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">刘兴刚博客</span><span class="logo-line-after"><i></i></span></a></div><p class="site-subtitle">关注Web开发,记录自己成长点滴</p></div><div class="site-nav-toggle"> <button><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br> 首页</a></li><li class="menu-item menu-item-categories"><a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br> 分类</a></li><li class="menu-item menu-item-about"><a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br> 关于</a></li><li class="menu-item menu-item-archives"><a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br> 归档</a></li><li class="menu-item menu-item-tags"><a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br> 标签</a></li><li class="menu-item menu-item-search"><a href="#" class="st-search-show-outputs"><i class="menu-item-icon fa fa-search fa-fw"></i><br> 搜索</a></li></ul><div class="site-search"><form class="site-search-form"> <input type="text" id="st-search-input" class="st-search-input st-default-search-input"></form><script type="text/javascript">!function(t,e,s,n,c,i,a){t.SwiftypeObject=c,t[c]=t[c]||function(){(t[c].q=t[c].q||[]).push(arguments)},i=e.createElement(s),a=e.getElementsByTagName(s)[0],i.async=1,i.src="//s.swiftypecdn.com/install/v2/st.js",a.parentNode.insertBefore(i,a)}(window,document,"script",0,"_st"),_st("install","R4PcZp6HShaABXQ7QdsT","2.0.0")</script></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> Docker（灵雀云）2016最新免费搭建科学上网服务</h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-05-19T13:34:36+08:00" content="2016-05-19">2016-05-19</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/WEB开发/" itemprop="url" rel="index"><span itemprop="name">WEB开发</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-05-19-docker-kexueshangwang/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-05-19-docker-kexueshangwang/" itemprop="commentsCount"></span></a></span> &nbsp; | &nbsp; <span class="page-pv">本文阅读量<span class="busuanzi-value" id="busuanzi_value_page_pv"></span> 次</span></div></header><div class="post-body" itemprop="articleBody"><p>科学上网服务可以说是捣鼓网络工作者基本都会接触到的东西，因为伟大的google迁出中国而百度的搜索结果让人很难满意，使用google搜索可以说经常的事情，虽然每天的频次不高，所以如何使用google搜索，一直在研究，从开始的修改host文件，到被一个技术男引导搭建vps上shadowsocks服务，虽说vps不贵，当初的初心也是体验一下国外vps的特色，在512m内存的vps搭建了本博客，但vps的续费也是让我犹豫不决的，所以免费翻墙功夫还得研究，加上工作中本地网络对某些网站是过滤还是什么，就是在本地打不开，在其他网络上没有问题，这个问题一直很纠结，老板感觉是网站出问题了，其实是网络的事，但这个事就有点和管网络的同事解释不清，现在想到的办法就是用代理ip浏览网站，但是网上发布的很多代理ip都是不管用，一个个试很费功夫，还很快ip就不能使用了。<a id="more"></a></p><p>今天不经意间看到一篇用docker搭建免费shadowsocks的文章，就按博主所说一步步尝试了一下，发现香港的服务器已经停止使用，网上说的方法都是去年的如今已经不管用了，提示充值，百度了一下发现</p><blockquote><p>2015-12-02 香港一区的服务已经全部停止。</p><p>消息称，香港一区不再免费。<br>于是百度了一上午发现很多文章还是去年的，就尝试的用灵雀云官方说的绑定官方微信号免费领取优惠券的方法搭建成功了，不过好像需要每个月手动去领取优惠券，否则会被停掉！</p></blockquote><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><blockquote><p>其实就是借用了蓝灯的代理服务，在Docker搭了一个转发。</p><p>优点就是你的电脑不用安装蓝灯了，且能支持手机使用！！</p><p>缺点蓝灯的速度有时快，有时慢，不稳定。</p></blockquote><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol><li>注册账号，<a href="https://console.alauda.cn/ap/register?reference_code=fr3qbj&amp;source=alauda" target="_blank" rel="external">点击这里</a>（含我的推广信息，介意的请百度 <strong>灵雀云</strong>） 前往注册。注册需要验证手机号和邮箱。</li><li>灵雀云新政策需要绑定微信才可以领取优惠券(该优惠券实现免费使用Docker，具体上官网自己研究不多说)。</li><li>Docker镜像 index.alauda.cn/zhaxg/docker-lantern-ss (不懂，可忽略)。</li><li>(可选) SwitchySharp扩展</li></ol><h2 id="部署服务"><a href="#部署服务" class="headerlink" title="部署服务"></a>部署服务</h2><ol><li>访问：<a href="https://hub.alauda.cn/" target="_blank" rel="external">https://hub.alauda.cn/</a> 搜索 docker-lantern-ss<br>搜索结果如图</li></ol><p><img src="/uploads/2016/05/20160519125216-300x87.png" alt="20160519125216"></p><p>当然选择最上面那个收藏下载多的，点击进去后，点击创建服务</p><p><img src="/uploads/2016/05/20160519125318-300x113.png" alt="20160519125318"></p><p>填写上服务名称，以前教程容器实例大小选择256m或者512m的，因为以前这两个香港服务器是免费的，我开始也是选择这两个中一个，创建好之后我又更新成4g的那个竟然也是可以的。</p><p><img src="/uploads/2016/05/20160519125344-300x143.png" alt="20160519125344"></p><p>其他的下一步按默认配置就可以，最好修改一下环境变量配置，不修改默认密码是password</p><p>把 SS_PASSWORD 可以修改成自己想要的密码，其他的按表格填就行了。</p><p><img src="/uploads/2016/05/faa1b260a5472036-300x125.png" alt="faa1b260a5472036"></p><p>点击【创建服务】。</p><p>经过一段时间的等待，显示如下图，说明部署完成。</p><p><img src="/uploads/2016/05/20160519125835-300x116.png" alt="20160519125835"></p><p>点击插卡 【日志】 显示下图。说明 Shadowsocks服务部署好了。</p><p><img src="/uploads/2016/05/20160519125923-300x166.png" alt="20160519125923"></p><p>如果，日志中无显示内容，或者一直处于 部署中.. 建议重新部署检查配置内容。</p><p>这样就部署成功了，可以在本地安装个ss客户端就是个exe文件，点击下载ss客户端，</p><blockquote><p>For Windows 7 or earlier, download <a href="https://kiwivm.64clouds.com/dist/shadowsocks-win-2.3.zip" target="_blank" rel="external">shadowsocks-win-2.3.zip</a></p><p>For Windows 8 or later, download <a href="https://kiwivm.64clouds.com/dist/shadowsocks-win-dotnet4.0-2.3.zip" target="_blank" rel="external">shadowsocks-win-dotnet4.0-2.3.zip</a><br>tcp:// 后面部分就是服务器地址和端口</p></blockquote><p>密码就是 配置环境变量中的密码。示例中是 NIUXSS</p><p>加密方式是配置环境变量中的方式。示例中是 AES-256-CFB</p><p><img src="/uploads/2016/05/0060lm7Tgw1eyd2n6pm2dj307w08tjsc-269x300.jpg" alt="0060lm7Tgw1eyd2n6pm2dj307w08tjsc"></p><p>由于我一直在用我自己vps的ss，所以没在本地ss客户端测试，而是直接修改的浏览器网络代理设置如下：</p><p><img src="/uploads/2016/05/20160519130453-279x300.png" alt="20160519130453"></p><p>如何嫌麻烦可以使用Proxy SwitchySharp插件，可以轻松管理和切换代理设置，对于代理的设置一定别忘了选择对所有协议均使用相同服务器，刚开始我没有选择发现本地ip没有变化，就想到最近很多网站都支持https了，所以看了下https代理没有设置，选择所有协议使用相同设置后ip就换成代理ip了</p><p><img src="/uploads/2016/05/20160519130642-300x181.png" alt="20160519130642"></p><p><img src="/uploads/2016/05/20160519131250.png" alt="20160519131250"></p><p>原先用自己vps的ss时就想让自己手机也翻墙，一直没有尝试，今天不忙就试了一下，打开手机wifi，一直按那个已经连接上的WiFi账号，同时按下音量减键和电源键截图如下，点击修改网络，高级选项里面设置如下：</p><p><img src="/uploads/2016/05/20160519132035-169x300.jpg" alt="QQ图片20160519132035"></p><p><img src="/uploads/2016/05/20160519132040-169x300.jpg" alt="QQ图片20160519132040"></p><p>手机google了一下当然也是成功的。</p><p>如果还是嫌麻烦只是暂时翻墙，可以使用我申请的ip地址：gangzi-verypeople.myalauda.cn 端口44813，官方显示了三个地址为什么只有第一个地址管用不是很清楚，还有代理ip竟然可以是日本，一开始是北京的一个ip，重启电脑再次开启竟然是日本ip，突然就很诧异，当初选择镜像在上海的意义是什么？</p><p><img src="/uploads/2016/05/20160519103008-300x85.png" alt="20160519103008"></p><p><img src="/uploads/2016/05/20160519103419-300x88.png" alt="20160519103419"></p><h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>最近无意间看到可以一个Google镜像网站：<a href="http://dir.scmor.com/google/" target="_blank" rel="external">http://dir.scmor.com/google/</a>，对于我们不是经常需要用google的小白来说还是挺不错的，省去了如安装chorm的壁虎漫步插件的繁琐，也不用花钱买VPS装ss了。</p></div><div></div><div></div><footer class="post-footer"><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2016-05-18-linux-dir-dian/" rel="next" title="Linux文件权限属性后面的点的含义"><i class="fa fa-chevron-left"></i> Linux文件权限属性后面的点的含义</a></div><div class="post-nav-prev post-nav-item"> <a href="/2016-05-25-apache-cgi/" rel="prev" title="Apache添加cgi模块">Apache添加cgi模块<i class="fa fa-chevron-right"></i></a></div></div></footer></article><div class="post-spread"></div></div></div><div class="comments" id="comments"><div class="ds-thread" data-thread-key="2016-05-19-docker-kexueshangwang/" data-title="Docker（灵雀云）2016最新免费搭建科学上网服务" data-url="http://liuxinggang.com/2016-05-19-docker-kexueshangwang/"></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap"> 文章目录</li><li class="sidebar-nav-overview" data-target="site-overview"> 站点概览</li></ul><section class="site-overview sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="http://liuxinggang.com/avatar.jpg" alt="刘兴刚"><p class="site-author-name" itemprop="name">刘兴刚</p><p class="site-description motion-element" itemprop="description"></p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"> <a href="/archives"><span class="site-state-item-count">72</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories"><span class="site-state-item-count">6</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags"><span class="site-state-item-count">4</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="links-of-author motion-element"></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署服务"><span class="nav-number">3.</span> <span class="nav-text">部署服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright"> &copy; <span itemprop="copyrightYear">2017</span><span class="with-love"><i class="fa fa-heart"></i></span> <span class="author" itemprop="copyrightHolder">刘兴刚</span></div><div class="powered-by"> 由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动</div><div class="theme-info"> 主题 - <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div><div class="busuanzi-count"><script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span><span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script><script type="text/javascript">var duoshuoQuery={short_name:"liuxinggangsu"};!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.id="duoshuo-script",t.src=("https:"==document.location.protocol?"https:":"http:")+"//static.duoshuo.com/embed.js",t.charset="UTF-8",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(t)}()</script></body></html>
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="刘兴刚" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="科学上网服务可以说是捣鼓网络工作者基本都会接触到的东西，因为伟大的google迁出中国而百度的搜索结果让人很难满意，使用google搜索可以说经常的事情，虽然每天的频次不高，所以如何使用google搜索，一直在研究，从开始的修改host文件，到被一个技术男引导搭建vps上shadowsocks服务，虽说vps不贵，当初的初心也是体验一下国外vps的特色，在512m内存的vps搭建了本博客，但vps">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker（灵雀云）2016最新免费搭建科学上网服务">
+<meta property="og:url" content="http://liuxinggang.com/2016-05-19-docker-kexueshangwang/index.html">
+<meta property="og:site_name" content="刘兴刚博客">
+<meta property="og:description" content="科学上网服务可以说是捣鼓网络工作者基本都会接触到的东西，因为伟大的google迁出中国而百度的搜索结果让人很难满意，使用google搜索可以说经常的事情，虽然每天的频次不高，所以如何使用google搜索，一直在研究，从开始的修改host文件，到被一个技术男引导搭建vps上shadowsocks服务，虽说vps不贵，当初的初心也是体验一下国外vps的特色，在512m内存的vps搭建了本博客，但vps">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519125216-300x87.png">
+<meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519125318-300x113.png">
+<meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519125344-300x143.png">
+<meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/faa1b260a5472036-300x125.png">
+<meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519125835-300x116.png">
+<meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519125923-300x166.png">
+<meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/0060lm7Tgw1eyd2n6pm2dj307w08tjsc-269x300.jpg">
+<meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519130453-279x300.png">
+<meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519130642-300x181.png">
+<meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519131250.png">
+<meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519132035-169x300.jpg">
+<meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519132040-169x300.jpg">
+<meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519103008-300x85.png">
+<meta property="og:image" content="http://liuxinggang.com/uploads/2016/05/20160519103419-300x88.png">
+<meta property="og:updated_time" content="2016-07-06T01:57:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker（灵雀云）2016最新免费搭建科学上网服务">
+<meta name="twitter:description" content="科学上网服务可以说是捣鼓网络工作者基本都会接触到的东西，因为伟大的google迁出中国而百度的搜索结果让人很难满意，使用google搜索可以说经常的事情，虽然每天的频次不高，所以如何使用google搜索，一直在研究，从开始的修改host文件，到被一个技术男引导搭建vps上shadowsocks服务，虽说vps不贵，当初的初心也是体验一下国外vps的特色，在512m内存的vps搭建了本博客，但vps">
+<meta name="twitter:image" content="http://liuxinggang.com/uploads/2016/05/20160519125216-300x87.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://liuxinggang.com/2016-05-19-docker-kexueshangwang/"/>
+
+  <title> Docker（灵雀云）2016最新免费搭建科学上网服务 | 刘兴刚博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ec066409d099697c71312c595dd643cc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">刘兴刚博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">关注Web开发,记录自己成长点滴</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'R4PcZp6HShaABXQ7QdsT','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Docker（灵雀云）2016最新免费搭建科学上网服务
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-19T13:34:36+08:00" content="2016-05-19">
+              2016-05-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/WEB开发/" itemprop="url" rel="index">
+                    <span itemprop="name">WEB开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-05-19-docker-kexueshangwang/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-05-19-docker-kexueshangwang/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv">本文阅读量
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>科学上网服务可以说是捣鼓网络工作者基本都会接触到的东西，因为伟大的google迁出中国而百度的搜索结果让人很难满意，使用google搜索可以说经常的事情，虽然每天的频次不高，所以如何使用google搜索，一直在研究，从开始的修改host文件，到被一个技术男引导搭建vps上shadowsocks服务，虽说vps不贵，当初的初心也是体验一下国外vps的特色，在512m内存的vps搭建了本博客，但vps的续费也是让我犹豫不决的，所以免费翻墙功夫还得研究，加上工作中本地网络对某些网站是过滤还是什么，就是在本地打不开，在其他网络上没有问题，这个问题一直很纠结，老板感觉是网站出问题了，其实是网络的事，但这个事就有点和管网络的同事解释不清，现在想到的办法就是用代理ip浏览网站，但是网上发布的很多代理ip都是不管用，一个个试很费功夫，还很快ip就不能使用了。<a id="more"></a></p>
+<p>今天不经意间看到一篇用docker搭建免费shadowsocks的文章，就按博主所说一步步尝试了一下，发现香港的服务器已经停止使用，网上说的方法都是去年的如今已经不管用了，提示充值，百度了一下发现</p>
+<blockquote>
+<p>2015-12-02 香港一区的服务已经全部停止。</p>
+<p>消息称，香港一区不再免费。<br>于是百度了一上午发现很多文章还是去年的，就尝试的用灵雀云官方说的绑定官方微信号免费领取优惠券的方法搭建成功了，不过好像需要每个月手动去领取优惠券，否则会被停掉！</p>
+</blockquote>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><blockquote>
+<p>其实就是借用了蓝灯的代理服务，在Docker搭了一个转发。</p>
+<p>优点就是你的电脑不用安装蓝灯了，且能支持手机使用！！</p>
+<p>缺点蓝灯的速度有时快，有时慢，不稳定。</p>
+</blockquote>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li>注册账号，<a href="https://console.alauda.cn/ap/register?reference_code=fr3qbj&amp;source=alauda" target="_blank" rel="external">点击这里</a>（含我的推广信息，介意的请百度 <strong>灵雀云</strong>） 前往注册。注册需要验证手机号和邮箱。</li>
+<li>灵雀云新政策需要绑定微信才可以领取优惠券(该优惠券实现免费使用Docker，具体上官网自己研究不多说)。</li>
+<li>Docker镜像 index.alauda.cn/zhaxg/docker-lantern-ss (不懂，可忽略)。</li>
+<li>(可选) SwitchySharp扩展</li>
+</ol>
+<h2 id="部署服务"><a href="#部署服务" class="headerlink" title="部署服务"></a>部署服务</h2><ol>
+<li>访问：<a href="https://hub.alauda.cn/" target="_blank" rel="external">https://hub.alauda.cn/</a> 搜索 docker-lantern-ss<br>搜索结果如图</li>
+</ol>
+<p><img src="/uploads/2016/05/20160519125216-300x87.png" alt="20160519125216"></p>
+<p>当然选择最上面那个收藏下载多的，点击进去后，点击创建服务</p>
+<p><img src="/uploads/2016/05/20160519125318-300x113.png" alt="20160519125318"></p>
+<p>填写上服务名称，以前教程容器实例大小选择256m或者512m的，因为以前这两个香港服务器是免费的，我开始也是选择这两个中一个，创建好之后我又更新成4g的那个竟然也是可以的。</p>
+<p><img src="/uploads/2016/05/20160519125344-300x143.png" alt="20160519125344"></p>
+<p>其他的下一步按默认配置就可以，最好修改一下环境变量配置，不修改默认密码是password</p>
+<p>把 SS_PASSWORD 可以修改成自己想要的密码，其他的按表格填就行了。</p>
+<p><img src="/uploads/2016/05/faa1b260a5472036-300x125.png" alt="faa1b260a5472036"></p>
+<p>点击【创建服务】。</p>
+<p>经过一段时间的等待，显示如下图，说明部署完成。</p>
+<p><img src="/uploads/2016/05/20160519125835-300x116.png" alt="20160519125835"></p>
+<p>点击插卡 【日志】 显示下图。说明 Shadowsocks服务部署好了。</p>
+<p><img src="/uploads/2016/05/20160519125923-300x166.png" alt="20160519125923"></p>
+<p>如果，日志中无显示内容，或者一直处于 部署中..  建议重新部署检查配置内容。</p>
+<p>这样就部署成功了，可以在本地安装个ss客户端就是个exe文件，点击下载ss客户端，</p>
+<blockquote>
+<p>For Windows 7 or earlier, download <a href="https://kiwivm.64clouds.com/dist/shadowsocks-win-2.3.zip" target="_blank" rel="external">shadowsocks-win-2.3.zip</a></p>
+<p>For Windows 8 or later, download <a href="https://kiwivm.64clouds.com/dist/shadowsocks-win-dotnet4.0-2.3.zip" target="_blank" rel="external">shadowsocks-win-dotnet4.0-2.3.zip</a><br>tcp:// 后面部分就是服务器地址和端口</p>
+</blockquote>
+<p>密码就是 配置环境变量中的密码。示例中是 NIUXSS</p>
+<p>加密方式是配置环境变量中的方式。示例中是 AES-256-CFB</p>
+<p><img src="/uploads/2016/05/0060lm7Tgw1eyd2n6pm2dj307w08tjsc-269x300.jpg" alt="0060lm7Tgw1eyd2n6pm2dj307w08tjsc"></p>
+<p>由于我一直在用我自己vps的ss，所以没在本地ss客户端测试，而是直接修改的浏览器网络代理设置如下：</p>
+<p><img src="/uploads/2016/05/20160519130453-279x300.png" alt="20160519130453"></p>
+<p>如何嫌麻烦可以使用Proxy SwitchySharp插件，可以轻松管理和切换代理设置，对于代理的设置一定别忘了选择对所有协议均使用相同服务器，刚开始我没有选择发现本地ip没有变化，就想到最近很多网站都支持https了，所以看了下https代理没有设置，选择所有协议使用相同设置后ip就换成代理ip了</p>
+<p><img src="/uploads/2016/05/20160519130642-300x181.png" alt="20160519130642"></p>
+<p><img src="/uploads/2016/05/20160519131250.png" alt="20160519131250"></p>
+<p>原先用自己vps的ss时就想让自己手机也翻墙，一直没有尝试，今天不忙就试了一下，打开手机wifi，一直按那个已经连接上的WiFi账号，同时按下音量减键和电源键截图如下，点击修改网络，高级选项里面设置如下：</p>
+<p><img src="/uploads/2016/05/20160519132035-169x300.jpg" alt="QQ图片20160519132035"></p>
+<p><img src="/uploads/2016/05/20160519132040-169x300.jpg" alt="QQ图片20160519132040"></p>
+<p>手机google了一下当然也是成功的。</p>
+<p>如果还是嫌麻烦只是暂时翻墙，可以使用我申请的ip地址：gangzi-verypeople.myalauda.cn 端口44813，官方显示了三个地址为什么只有第一个地址管用不是很清楚，还有代理ip竟然可以是日本，一开始是北京的一个ip，重启电脑再次开启竟然是日本ip，突然就很诧异，当初选择镜像在上海的意义是什么？</p>
+<p><img src="/uploads/2016/05/20160519103008-300x85.png" alt="20160519103008"></p>
+<p><img src="/uploads/2016/05/20160519103419-300x88.png" alt="20160519103419"></p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>最近无意间看到可以一个Google镜像网站：<a href="http://dir.scmor.com/google/" target="_blank" rel="external">http://dir.scmor.com/google/</a>，对于我们不是经常需要用google的小白来说还是挺不错的，省去了如安装chorm的壁虎漫步插件的繁琐，也不用花钱买VPS装ss了。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016-05-18-linux-dir-dian/" rel="next" title="Linux文件权限属性后面的点的含义">
+                <i class="fa fa-chevron-left"></i> Linux文件权限属性后面的点的含义
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016-05-25-apache-cgi/" rel="prev" title="Apache添加cgi模块">
+                Apache添加cgi模块 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016-05-19-docker-kexueshangwang/"
+           data-title="Docker（灵雀云）2016最新免费搭建科学上网服务" data-url="http://liuxinggang.com/2016-05-19-docker-kexueshangwang/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://liuxinggang.com/avatar.jpg"
+               alt="刘兴刚" />
+          <p class="site-author-name" itemprop="name">刘兴刚</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">72</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署服务"><span class="nav-number">3.</span> <span class="nav-text">部署服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘兴刚</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"liuxinggangsu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

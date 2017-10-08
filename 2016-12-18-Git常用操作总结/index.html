@@ -1,1 +1,723 @@
-<!doctype html><html class="theme-next pisces use-motion"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="//fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css"><link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css"><link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css"><meta name="keywords" content="git,"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1"><meta name="description" content="去年匆匆与git接触了一下，由于有些linux基础，对于命令还是很容易上手，就按部就班稀里糊涂的搭建了本博客到github，如今直到2016年尾声才又拾起hexo，用去年写的《使用Git Hook自动部署Hexo到个人VPS》一直实现不了自动部署，不得不认真学习下git，现在命令行用的比较多，所以把一些指令总结一下，以便回顾和查询。理解这些指令，觉得最重要的是理解Git的内部原理，比如Git的分布"><meta name="keywords" content="git"><meta property="og:type" content="article"><meta property="og:title" content="Git常用操作总结"><meta property="og:url" content="http://liuxinggang.com/2016-12-18-Git常用操作总结/index.html"><meta property="og:site_name" content="刘兴刚博客"><meta property="og:description" content="去年匆匆与git接触了一下，由于有些linux基础，对于命令还是很容易上手，就按部就班稀里糊涂的搭建了本博客到github，如今直到2016年尾声才又拾起hexo，用去年写的《使用Git Hook自动部署Hexo到个人VPS》一直实现不了自动部署，不得不认真学习下git，现在命令行用的比较多，所以把一些指令总结一下，以便回顾和查询。理解这些指令，觉得最重要的是理解Git的内部原理，比如Git的分布"><meta property="og:locale" content="zh-Hans"><meta property="og:image" content="http://liuxinggang.com/uploads/2016/12/git-flow.jpg"><meta property="og:image" content="http://liuxinggang.com/uploads/2016/12/git-trees.jpg"><meta property="og:image" content="http://liuxinggang.com/uploads/2016/12/git-merge.png"><meta property="og:updated_time" content="2016-12-18T08:32:36.000Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Git常用操作总结"><meta name="twitter:description" content="去年匆匆与git接触了一下，由于有些linux基础，对于命令还是很容易上手，就按部就班稀里糊涂的搭建了本博客到github，如今直到2016年尾声才又拾起hexo，用去年写的《使用Git Hook自动部署Hexo到个人VPS》一直实现不了自动部署，不得不认真学习下git，现在命令行用的比较多，所以把一些指令总结一下，以便回顾和查询。理解这些指令，觉得最重要的是理解Git的内部原理，比如Git的分布"><meta name="twitter:image" content="http://liuxinggang.com/uploads/2016/12/git-flow.jpg"><script type="text/javascript" id="hexo.configuration">var NexT=window.NexT||{},CONFIG={scheme:"Pisces",sidebar:{position:"left",display:"post"},fancybox:!0,motion:!0,duoshuo:{userId:0,author:"博主"}}</script><link rel="canonical" href="http://liuxinggang.com/2016-12-18-Git常用操作总结/"><title> Git常用操作总结 | 刘兴刚博客</title></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans"><script type="text/javascript">var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="//hm.baidu.com/hm.js?ec066409d099697c71312c595dd643cc";var c=document.getElementsByTagName("script")[0];c.parentNode.insertBefore(e,c)}()</script><div class="container one-collumn sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">刘兴刚博客</span><span class="logo-line-after"><i></i></span></a></div><p class="site-subtitle">关注Web开发,记录自己成长点滴</p></div><div class="site-nav-toggle"> <button><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br> 首页</a></li><li class="menu-item menu-item-categories"><a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br> 分类</a></li><li class="menu-item menu-item-about"><a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br> 关于</a></li><li class="menu-item menu-item-archives"><a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br> 归档</a></li><li class="menu-item menu-item-tags"><a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br> 标签</a></li><li class="menu-item menu-item-search"><a href="#" class="st-search-show-outputs"><i class="menu-item-icon fa fa-search fa-fw"></i><br> 搜索</a></li></ul><div class="site-search"><form class="site-search-form"> <input type="text" id="st-search-input" class="st-search-input st-default-search-input"></form><script type="text/javascript">!function(t,e,s,n,c,i,a){t.SwiftypeObject=c,t[c]=t[c]||function(){(t[c].q=t[c].q||[]).push(arguments)},i=e.createElement(s),a=e.getElementsByTagName(s)[0],i.async=1,i.src="//s.swiftypecdn.com/install/v2/st.js",a.parentNode.insertBefore(i,a)}(window,document,"script",0,"_st"),_st("install","R4PcZp6HShaABXQ7QdsT","2.0.0")</script></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> Git常用操作总结</h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-12-18T13:10:13+08:00" content="2016-12-18">2016-12-18</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/转载日志/" itemprop="url" rel="index"><span itemprop="name">转载日志</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-12-18-Git常用操作总结/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-12-18-Git常用操作总结/" itemprop="commentsCount"></span></a></span> &nbsp; | &nbsp; <span class="page-pv">本文阅读量<span class="busuanzi-value" id="busuanzi_value_page_pv"></span> 次</span></div></header><div class="post-body" itemprop="articleBody"><p><img src="/uploads/2016/12/git-flow.jpg" alt="git-flow"><br>去年匆匆与git接触了一下，由于有些linux基础，对于命令还是很容易上手，就按部就班稀里糊涂的搭建了本博客到github，如今直到2016年尾声才又拾起hexo，用去年写的《<a href="https://www.liuxinggang.com/2016-06-17-%E4%BD%BF%E7%94%A8Git-Hook%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2Hexo%E5%88%B0%E4%B8%AA%E4%BA%BAVPS/" target="_blank" rel="external">使用Git Hook自动部署Hexo到个人VPS</a>》一直实现不了自动部署，不得不认真学习下git，现在命令行用的比较多，所以把一些指令总结一下，以便回顾和查询。<br>理解这些指令，觉得最重要的是理解Git的内部原理，比如Git的分布式版本控制，分清楚工作区、暂存区、版本库，还有就是理解Git跟踪并管理的是修改，而非文件。<a id="more"></a></p><h2 id="第一步是要获得一个GIT仓库"><a href="#第一步是要获得一个GIT仓库" class="headerlink" title="第一步是要获得一个GIT仓库"></a>第一步是要获得一个GIT仓库</h2><p>有两种获得GIT仓库的方法，一是在需要用GIT管理的项目的根目录执行：<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git init</div></pre></td></tr></table></figure><p></p><p>执行后可以看到，仅仅在项目目录多出了一个.git目录，关于版本等的所有信息都在这个目录里面。<br>　　另一种方式是克隆远程目录，由于是将远程服务器上的仓库完全镜像一份至本地，而不是取某一个特定版本，所以用clone而不是checkout：<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone &lt;url&gt;</div></pre></td></tr></table></figure><p></p><h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name &quot;Your Name&quot;</div><div class="line">$ git config --global user.email &quot;email@example.com&quot;</div></pre></td></tr></table></figure><p>ssh -v git@github.com //检验下Git安装是否正确，<br>显示hi github用户名！You’ve successfully authenticated 说明Git安装正确</p><h2 id="提交"><a href="#提交" class="headerlink" title="提交"></a>提交</h2><p>git tracked的是修改，而不是文件<br><img src="/uploads/2016/12/git-trees.jpg" alt="git-trees"><br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#将“当前修改”移动到暂存区(stage)</div><div class="line">$ git add somfile.txt</div><div class="line">#将暂存区修改提交</div><div class="line">$ git commit -m &quot;Add somfile.txt.&quot;</div></pre></td></tr></table></figure><p></p><h2 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git status</div><div class="line">$ git diff</div></pre></td></tr></table></figure><h2 id="回退"><a href="#回退" class="headerlink" title="回退"></a>回退</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"># 放弃工作区修改</div><div class="line">$ git checkout -- file.name</div><div class="line">$ git checkout -- .</div><div class="line"></div><div class="line"># 取消commit(比如需要重写commit信息)</div><div class="line">$ git reset --soft HEAD</div><div class="line"></div><div class="line"># 取消commit、add(重新提交代码和commit)</div><div class="line">$ git reset HEAD</div><div class="line">$ git reset --mixed HEAD</div><div class="line"></div><div class="line"># 取消commit、add、工作区修改(需要完全重置)</div><div class="line">$ git reset --hard HEAD</div></pre></td></tr></table></figure><h2 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git reflog</div><div class="line">$ git log</div></pre></td></tr></table></figure><h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ rm file.name</div><div class="line">$ git rm file.name</div><div class="line">$ git commit -m &quot;Del&quot;</div></pre></td></tr></table></figure><h2 id="Git-远程分支管理"><a href="#Git-远程分支管理" class="headerlink" title="Git 远程分支管理"></a>Git 远程分支管理</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">git pull                         # 抓取远程仓库所有分支更新并合并到本地</div><div class="line">git pull --no-ff                 # 抓取远程仓库所有分支更新并合并到本地，不要快进合并</div><div class="line">git fetch origin                 # 抓取远程仓库更新</div><div class="line">git merge origin/master          # 将远程主分支合并到本地当前分支</div><div class="line">git checkout --track origin/branch     # 跟踪某个远程分支创建相应的本地分支</div><div class="line">git checkout -b &lt;local_branch&gt; origin/&lt;remote_branch&gt;  # 基于远程分支创建本地分支，功能同上</div><div class="line"> </div><div class="line">git push                         # push所有分支</div><div class="line">git push origin master           # 将本地主分支推到远程主分支</div><div class="line"># 第一次推送，-u(--set-upstream)指定默认上游</div><div class="line">git push -u origin master        # 将本地主分支推到远程(如无远程主分支则创建，用于初始化远程仓库)</div><div class="line">git push origin &lt;local_branch&gt;   # 创建远程分支， origin是远程仓库名</div><div class="line">git push origin &lt;local_branch&gt;:&lt;remote_branch&gt;  # 创建远程分支</div><div class="line">git push origin :&lt;remote_branch&gt;  #先删除本地分支(git branch -d &lt;branch&gt;)，然后再push删除远程分支</div></pre></td></tr></table></figure><h2 id="Git-远程仓库管理"><a href="#Git-远程仓库管理" class="headerlink" title="Git 远程仓库管理"></a>Git 远程仓库管理</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git remote -v                    # 查看远程服务器地址和仓库名称</div><div class="line">git remote show origin           # 查看远程服务器仓库状态</div><div class="line">git remote add origin git@github.com:whuhacker/Unblock-Youku-Firefox.git         # 添加远程仓库地址</div><div class="line">git remote set-url origin git@github.com:whuhacker/Unblock-Youku-Firefox.git # 设置远程仓库地址(用于修改远程仓库地址)</div><div class="line">git remote rm &lt;repository&gt;       # 删除远程仓库</div></pre></td></tr></table></figure><h2 id="克隆"><a href="#克隆" class="headerlink" title="克隆"></a>克隆</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git clone https://github.com/Yikun/yikun.github.com.git path</div><div class="line">$ git clone git@github.com:Yikun/yikun.github.com.git path</div></pre></td></tr></table></figure><h2 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h2><p><img src="/uploads/2016/12/git-merge.png" alt="git-merge"><br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"># 查看当前分支</div><div class="line">$ git branch</div><div class="line"></div><div class="line"># 创建分支</div><div class="line">$ git branch dev</div><div class="line"># 切换分支</div><div class="line">$ git checkout dev</div><div class="line"></div><div class="line"># 创建并checkout分支</div><div class="line">$ git checkout -b dev</div><div class="line"></div><div class="line"># 合并分支</div><div class="line">$ git merge dev</div><div class="line"></div><div class="line"># 删除分支</div><div class="line">$ git branch -d dev</div></pre></td></tr></table></figure><p></p><h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git tag 0.1.1</div><div class="line">$ git push origin --tags</div></pre></td></tr></table></figure><p>目前使用git主要流程就是先在本地clone一个git仓库，然后设置一下看git是否连接成功，接着git remote add origin git@github.com:michaelliao/learngit.git，添加要连接的远程仓库地址，进行push（将本地主分支推到远程主分支）还是pull（抓取远程仓库所有分支更新并合并到本地）操作即可。</p><p>注意：本文Fork自 yikun.github.io，凹凸实验室作进一步完善。<br>感谢您的阅读，本文由 凹凸实验室 版权所有。如若转载，请注明出处：凹凸实验室（<a href="https://aotu.io/notes/2015/11/17/Git-Commands/）" target="_blank" rel="external">https://aotu.io/notes/2015/11/17/Git-Commands/）</a></p></div><div></div><div></div><footer class="post-footer"><div class="post-tags"> <a href="/tags/git/" rel="tag">#git</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2016-12-16-谈谈网站性能优化/" rel="next" title="谈谈网站性能优化"><i class="fa fa-chevron-left"></i> 谈谈网站性能优化</a></div><div class="post-nav-prev post-nav-item"> <a href="/2016-12-26-周末要不要处理工作的思考/" rel="prev" title="周末要不要处理工作的思考">周末要不要处理工作的思考<i class="fa fa-chevron-right"></i></a></div></div></footer></article><div class="post-spread"></div></div></div><div class="comments" id="comments"><div class="ds-thread" data-thread-key="2016-12-18-Git常用操作总结/" data-title="Git常用操作总结" data-url="http://liuxinggang.com/2016-12-18-Git常用操作总结/"></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap"> 文章目录</li><li class="sidebar-nav-overview" data-target="site-overview"> 站点概览</li></ul><section class="site-overview sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="http://liuxinggang.com/avatar.jpg" alt="刘兴刚"><p class="site-author-name" itemprop="name">刘兴刚</p><p class="site-description motion-element" itemprop="description"></p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"> <a href="/archives"><span class="site-state-item-count">72</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories"><span class="site-state-item-count">6</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags"><span class="site-state-item-count">4</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="links-of-author motion-element"></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一步是要获得一个GIT仓库"><span class="nav-number">1.</span> <span class="nav-text">第一步是要获得一个GIT仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置"><span class="nav-number">2.</span> <span class="nav-text">设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提交"><span class="nav-number">3.</span> <span class="nav-text">提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态"><span class="nav-number">4.</span> <span class="nav-text">状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回退"><span class="nav-number">5.</span> <span class="nav-text">回退</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#记录"><span class="nav-number">6.</span> <span class="nav-text">记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除"><span class="nav-number">7.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-远程分支管理"><span class="nav-number">8.</span> <span class="nav-text">Git 远程分支管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-远程仓库管理"><span class="nav-number">9.</span> <span class="nav-text">Git 远程仓库管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#克隆"><span class="nav-number">10.</span> <span class="nav-text">克隆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支操作"><span class="nav-number">11.</span> <span class="nav-text">分支操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标签"><span class="nav-number">12.</span> <span class="nav-text">标签</span></a></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright"> &copy; <span itemprop="copyrightYear">2017</span><span class="with-love"><i class="fa fa-heart"></i></span> <span class="author" itemprop="copyrightHolder">刘兴刚</span></div><div class="powered-by"> 由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动</div><div class="theme-info"> 主题 - <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div><div class="busuanzi-count"><script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span><span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script><script type="text/javascript">var duoshuoQuery={short_name:"liuxinggangsu"};!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.id="duoshuo-script",t.src=("https:"==document.location.protocol?"https:":"http:")+"//static.duoshuo.com/embed.js",t.charset="UTF-8",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(t)}()</script></body></html>
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="git," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="去年匆匆与git接触了一下，由于有些linux基础，对于命令还是很容易上手，就按部就班稀里糊涂的搭建了本博客到github，如今直到2016年尾声才又拾起hexo，用去年写的《使用Git Hook自动部署Hexo到个人VPS》一直实现不了自动部署，不得不认真学习下git，现在命令行用的比较多，所以把一些指令总结一下，以便回顾和查询。理解这些指令，觉得最重要的是理解Git的内部原理，比如Git的分布">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git常用操作总结">
+<meta property="og:url" content="http://liuxinggang.com/2016-12-18-Git常用操作总结/index.html">
+<meta property="og:site_name" content="刘兴刚博客">
+<meta property="og:description" content="去年匆匆与git接触了一下，由于有些linux基础，对于命令还是很容易上手，就按部就班稀里糊涂的搭建了本博客到github，如今直到2016年尾声才又拾起hexo，用去年写的《使用Git Hook自动部署Hexo到个人VPS》一直实现不了自动部署，不得不认真学习下git，现在命令行用的比较多，所以把一些指令总结一下，以便回顾和查询。理解这些指令，觉得最重要的是理解Git的内部原理，比如Git的分布">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://liuxinggang.com/uploads/2016/12/git-flow.jpg">
+<meta property="og:image" content="http://liuxinggang.com/uploads/2016/12/git-trees.jpg">
+<meta property="og:image" content="http://liuxinggang.com/uploads/2016/12/git-merge.png">
+<meta property="og:updated_time" content="2016-12-18T08:32:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git常用操作总结">
+<meta name="twitter:description" content="去年匆匆与git接触了一下，由于有些linux基础，对于命令还是很容易上手，就按部就班稀里糊涂的搭建了本博客到github，如今直到2016年尾声才又拾起hexo，用去年写的《使用Git Hook自动部署Hexo到个人VPS》一直实现不了自动部署，不得不认真学习下git，现在命令行用的比较多，所以把一些指令总结一下，以便回顾和查询。理解这些指令，觉得最重要的是理解Git的内部原理，比如Git的分布">
+<meta name="twitter:image" content="http://liuxinggang.com/uploads/2016/12/git-flow.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://liuxinggang.com/2016-12-18-Git常用操作总结/"/>
+
+  <title> Git常用操作总结 | 刘兴刚博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ec066409d099697c71312c595dd643cc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">刘兴刚博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">关注Web开发,记录自己成长点滴</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'R4PcZp6HShaABXQ7QdsT','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Git常用操作总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-18T13:10:13+08:00" content="2016-12-18">
+              2016-12-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/转载日志/" itemprop="url" rel="index">
+                    <span itemprop="name">转载日志</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-12-18-Git常用操作总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-12-18-Git常用操作总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv">本文阅读量
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/uploads/2016/12/git-flow.jpg" alt="git-flow"><br>去年匆匆与git接触了一下，由于有些linux基础，对于命令还是很容易上手，就按部就班稀里糊涂的搭建了本博客到github，如今直到2016年尾声才又拾起hexo，用去年写的《<a href="https://www.liuxinggang.com/2016-06-17-%E4%BD%BF%E7%94%A8Git-Hook%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2Hexo%E5%88%B0%E4%B8%AA%E4%BA%BAVPS/" target="_blank" rel="external">使用Git Hook自动部署Hexo到个人VPS</a>》一直实现不了自动部署，不得不认真学习下git，现在命令行用的比较多，所以把一些指令总结一下，以便回顾和查询。<br>理解这些指令，觉得最重要的是理解Git的内部原理，比如Git的分布式版本控制，分清楚工作区、暂存区、版本库，还有就是理解Git跟踪并管理的是修改，而非文件。<a id="more"></a></p>
+<h2 id="第一步是要获得一个GIT仓库"><a href="#第一步是要获得一个GIT仓库" class="headerlink" title="第一步是要获得一个GIT仓库"></a>第一步是要获得一个GIT仓库</h2><p>有两种获得GIT仓库的方法，一是在需要用GIT管理的项目的根目录执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git init</div></pre></td></tr></table></figure></p>
+<p>执行后可以看到，仅仅在项目目录多出了一个.git目录，关于版本等的所有信息都在这个目录里面。<br>　　另一种方式是克隆远程目录，由于是将远程服务器上的仓库完全镜像一份至本地，而不是取某一个特定版本，所以用clone而不是checkout：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone &lt;url&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name &quot;Your Name&quot;</div><div class="line">$ git config --global user.email &quot;email@example.com&quot;</div></pre></td></tr></table></figure>
+<p>ssh -v git@github.com   //检验下Git安装是否正确，<br>显示hi github用户名！You’ve successfully authenticated 说明Git安装正确</p>
+<h2 id="提交"><a href="#提交" class="headerlink" title="提交"></a>提交</h2><p>git tracked的是修改，而不是文件<br><img src="/uploads/2016/12/git-trees.jpg" alt="git-trees"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#将“当前修改”移动到暂存区(stage)</div><div class="line">$ git add somfile.txt</div><div class="line">#将暂存区修改提交</div><div class="line">$ git commit -m &quot;Add somfile.txt.&quot;</div></pre></td></tr></table></figure></p>
+<h2 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git status</div><div class="line">$ git diff</div></pre></td></tr></table></figure>
+<h2 id="回退"><a href="#回退" class="headerlink" title="回退"></a>回退</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"># 放弃工作区修改</div><div class="line">$ git checkout -- file.name</div><div class="line">$ git checkout -- .</div><div class="line"></div><div class="line"># 取消commit(比如需要重写commit信息)</div><div class="line">$ git reset --soft HEAD</div><div class="line"></div><div class="line"># 取消commit、add(重新提交代码和commit)</div><div class="line">$ git reset HEAD</div><div class="line">$ git reset --mixed HEAD</div><div class="line"></div><div class="line"># 取消commit、add、工作区修改(需要完全重置)</div><div class="line">$ git reset --hard HEAD</div></pre></td></tr></table></figure>
+<h2 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git reflog</div><div class="line">$ git log</div></pre></td></tr></table></figure>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ rm file.name</div><div class="line">$ git rm file.name</div><div class="line">$ git commit -m &quot;Del&quot;</div></pre></td></tr></table></figure>
+<h2 id="Git-远程分支管理"><a href="#Git-远程分支管理" class="headerlink" title="Git 远程分支管理"></a>Git 远程分支管理</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">git pull                         # 抓取远程仓库所有分支更新并合并到本地</div><div class="line">git pull --no-ff                 # 抓取远程仓库所有分支更新并合并到本地，不要快进合并</div><div class="line">git fetch origin                 # 抓取远程仓库更新</div><div class="line">git merge origin/master          # 将远程主分支合并到本地当前分支</div><div class="line">git checkout --track origin/branch     # 跟踪某个远程分支创建相应的本地分支</div><div class="line">git checkout -b &lt;local_branch&gt; origin/&lt;remote_branch&gt;  # 基于远程分支创建本地分支，功能同上</div><div class="line"> </div><div class="line">git push                         # push所有分支</div><div class="line">git push origin master           # 将本地主分支推到远程主分支</div><div class="line"># 第一次推送，-u(--set-upstream)指定默认上游</div><div class="line">git push -u origin master        # 将本地主分支推到远程(如无远程主分支则创建，用于初始化远程仓库)</div><div class="line">git push origin &lt;local_branch&gt;   # 创建远程分支， origin是远程仓库名</div><div class="line">git push origin &lt;local_branch&gt;:&lt;remote_branch&gt;  # 创建远程分支</div><div class="line">git push origin :&lt;remote_branch&gt;  #先删除本地分支(git branch -d &lt;branch&gt;)，然后再push删除远程分支</div></pre></td></tr></table></figure>
+<h2 id="Git-远程仓库管理"><a href="#Git-远程仓库管理" class="headerlink" title="Git 远程仓库管理"></a>Git 远程仓库管理</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git remote -v                    # 查看远程服务器地址和仓库名称</div><div class="line">git remote show origin           # 查看远程服务器仓库状态</div><div class="line">git remote add origin git@github.com:whuhacker/Unblock-Youku-Firefox.git         # 添加远程仓库地址</div><div class="line">git remote set-url origin git@github.com:whuhacker/Unblock-Youku-Firefox.git # 设置远程仓库地址(用于修改远程仓库地址)</div><div class="line">git remote rm &lt;repository&gt;       # 删除远程仓库</div></pre></td></tr></table></figure>
+<h2 id="克隆"><a href="#克隆" class="headerlink" title="克隆"></a>克隆</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git clone https://github.com/Yikun/yikun.github.com.git path</div><div class="line">$ git clone git@github.com:Yikun/yikun.github.com.git path</div></pre></td></tr></table></figure>
+<h2 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h2><p><img src="/uploads/2016/12/git-merge.png" alt="git-merge"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"># 查看当前分支</div><div class="line">$ git branch</div><div class="line"></div><div class="line"># 创建分支</div><div class="line">$ git branch dev</div><div class="line"># 切换分支</div><div class="line">$ git checkout dev</div><div class="line"></div><div class="line"># 创建并checkout分支</div><div class="line">$ git checkout -b dev</div><div class="line"></div><div class="line"># 合并分支</div><div class="line">$ git merge dev</div><div class="line"></div><div class="line"># 删除分支</div><div class="line">$ git branch -d dev</div></pre></td></tr></table></figure></p>
+<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git tag 0.1.1</div><div class="line">$ git push origin --tags</div></pre></td></tr></table></figure>
+<p>目前使用git主要流程就是先在本地clone一个git仓库，然后设置一下看git是否连接成功，接着git remote add origin git@github.com:michaelliao/learngit.git，添加要连接的远程仓库地址，进行push（将本地主分支推到远程主分支）还是pull（抓取远程仓库所有分支更新并合并到本地）操作即可。</p>
+<p>注意：本文Fork自 yikun.github.io，凹凸实验室作进一步完善。<br>感谢您的阅读，本文由 凹凸实验室 版权所有。如若转载，请注明出处：凹凸实验室（<a href="https://aotu.io/notes/2015/11/17/Git-Commands/）" target="_blank" rel="external">https://aotu.io/notes/2015/11/17/Git-Commands/）</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag">#git</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016-12-16-谈谈网站性能优化/" rel="next" title="谈谈网站性能优化">
+                <i class="fa fa-chevron-left"></i> 谈谈网站性能优化
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016-12-26-周末要不要处理工作的思考/" rel="prev" title="周末要不要处理工作的思考">
+                周末要不要处理工作的思考 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016-12-18-Git常用操作总结/"
+           data-title="Git常用操作总结" data-url="http://liuxinggang.com/2016-12-18-Git常用操作总结/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://liuxinggang.com/avatar.jpg"
+               alt="刘兴刚" />
+          <p class="site-author-name" itemprop="name">刘兴刚</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">72</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一步是要获得一个GIT仓库"><span class="nav-number">1.</span> <span class="nav-text">第一步是要获得一个GIT仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置"><span class="nav-number">2.</span> <span class="nav-text">设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提交"><span class="nav-number">3.</span> <span class="nav-text">提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态"><span class="nav-number">4.</span> <span class="nav-text">状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回退"><span class="nav-number">5.</span> <span class="nav-text">回退</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#记录"><span class="nav-number">6.</span> <span class="nav-text">记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除"><span class="nav-number">7.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-远程分支管理"><span class="nav-number">8.</span> <span class="nav-text">Git 远程分支管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-远程仓库管理"><span class="nav-number">9.</span> <span class="nav-text">Git 远程仓库管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#克隆"><span class="nav-number">10.</span> <span class="nav-text">克隆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支操作"><span class="nav-number">11.</span> <span class="nav-text">分支操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标签"><span class="nav-number">12.</span> <span class="nav-text">标签</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘兴刚</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"liuxinggangsu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,1 +1,721 @@
-<!doctype html><html class="theme-next pisces use-motion"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="//fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css"><link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css"><link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css"><meta name="keywords" content="刘兴刚"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1"><meta name="description" content="当服务器上有N多网站时，一旦出现访问慢和卡的时候就会头痛的不知道是哪个网站出现问题而导致的，只需要用到系统上自带的cmd(命令提示符)和任务管理器。"><meta property="og:type" content="article"><meta property="og:title" content="用iisapp查看服务器上网站占资源情况"><meta property="og:url" content="http://liuxinggang.com/2016-02-21-iisapp-web/index.html"><meta property="og:site_name" content="刘兴刚博客"><meta property="og:description" content="当服务器上有N多网站时，一旦出现访问慢和卡的时候就会头痛的不知道是哪个网站出现问题而导致的，只需要用到系统上自带的cmd(命令提示符)和任务管理器。"><meta property="og:locale" content="zh-Hans"><meta property="og:image" content="http://liuxinggang.com/uploads/2016/02/300x68.png"><meta property="og:updated_time" content="2016-06-13T09:50:50.000Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="用iisapp查看服务器上网站占资源情况"><meta name="twitter:description" content="当服务器上有N多网站时，一旦出现访问慢和卡的时候就会头痛的不知道是哪个网站出现问题而导致的，只需要用到系统上自带的cmd(命令提示符)和任务管理器。"><meta name="twitter:image" content="http://liuxinggang.com/uploads/2016/02/300x68.png"><script type="text/javascript" id="hexo.configuration">var NexT=window.NexT||{},CONFIG={scheme:"Pisces",sidebar:{position:"left",display:"post"},fancybox:!0,motion:!0,duoshuo:{userId:0,author:"博主"}}</script><link rel="canonical" href="http://liuxinggang.com/2016-02-21-iisapp-web/"><title> 用iisapp查看服务器上网站占资源情况 | 刘兴刚博客</title></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans"><script type="text/javascript">var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="//hm.baidu.com/hm.js?ec066409d099697c71312c595dd643cc";var c=document.getElementsByTagName("script")[0];c.parentNode.insertBefore(e,c)}()</script><div class="container one-collumn sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">刘兴刚博客</span><span class="logo-line-after"><i></i></span></a></div><p class="site-subtitle">关注Web开发,记录自己成长点滴</p></div><div class="site-nav-toggle"> <button><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br> 首页</a></li><li class="menu-item menu-item-categories"><a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br> 分类</a></li><li class="menu-item menu-item-about"><a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br> 关于</a></li><li class="menu-item menu-item-archives"><a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br> 归档</a></li><li class="menu-item menu-item-tags"><a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br> 标签</a></li><li class="menu-item menu-item-search"><a href="#" class="st-search-show-outputs"><i class="menu-item-icon fa fa-search fa-fw"></i><br> 搜索</a></li></ul><div class="site-search"><form class="site-search-form"> <input type="text" id="st-search-input" class="st-search-input st-default-search-input"></form><script type="text/javascript">!function(t,e,s,n,c,i,a){t.SwiftypeObject=c,t[c]=t[c]||function(){(t[c].q=t[c].q||[]).push(arguments)},i=e.createElement(s),a=e.getElementsByTagName(s)[0],i.async=1,i.src="//s.swiftypecdn.com/install/v2/st.js",a.parentNode.insertBefore(i,a)}(window,document,"script",0,"_st"),_st("install","R4PcZp6HShaABXQ7QdsT","2.0.0")</script></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> 用iisapp查看服务器上网站占资源情况</h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-02-21T15:43:00+08:00" content="2016-02-21">2016-02-21</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/WEB开发/" itemprop="url" rel="index"><span itemprop="name">WEB开发</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-02-21-iisapp-web/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-02-21-iisapp-web/" itemprop="commentsCount"></span></a></span> &nbsp; | &nbsp; <span class="page-pv">本文阅读量<span class="busuanzi-value" id="busuanzi_value_page_pv"></span> 次</span></div></header><div class="post-body" itemprop="articleBody"><p>当服务器上有N多网站时，一旦出现访问慢和卡的时候就会头痛的不知道是哪个网站出现问题而导致的，只需要用到系统上自带的cmd(命令提示符)和任务管理器。<a id="more"></a></p><p>首先，先打开任务管理器，点上面的菜单栏里的查看—-选择列，把PID给勾上，这样就能区分出各个网站所占的进程了；当然这里有一个前提就是首先得把服务器上的所有网站都独立分配一个程序池</p><p>第二步，打开命令提示符，即在运行里输入CMD然后回车就行了。然后输入命令 iisapp -a ，第一次输入的时候可能会提示需要安装个什么组件，这个组件是服务器上本来就存在的，不用下载，然后执行命令 iisapp -a就行了，就能把所有网站的应用池名字和PID号显示出来，然后根据进程里的PID号来对应看看是哪个应用程序池，然后再看看是哪个网站用到的这个应用 程序池就行了。</p><h3 id="w3wp-exe认识入门"><a href="#w3wp-exe认识入门" class="headerlink" title="w3wp.exe认识入门"></a>w3wp.exe认识入门</h3><blockquote><p>在Windows Server 2003中对于每一个Web应用，IIS6.0都用一个独立的w3wp.exe的实例来运行它。w3wp.exe也称为工作进程（每一个主机头都会有一个）直接在任务管理器中结束进程是不起作用的，结束后不久它会执行启动，要想结束它可以在IIS中找到相应的应用程序池停止相应的应用程序池工作。</p></blockquote><h3 id="在执行iisapp-vbs时，可能会提示如下错误："><a href="#在执行iisapp-vbs时，可能会提示如下错误：" class="headerlink" title="在执行iisapp.vbs时，可能会提示如下错误："></a>在执行iisapp.vbs时，可能会提示如下错误：</h3><p>1.Windows Script Component - file://C:WINDOWSsystem32iisschlp.wsc</p><p>[88,25] 属性值无效 : progid</p><p><img src="/uploads/2016/02/300x68.png" alt="图片1"></p><p>解决方法：</p><p>注册命令： regsvr32 wshom.ocx</p><p>把FSO组件恢复成初始：Scripting.FileSystemObject</p><p>以上两条命令都是为了ASP安全而去改名或者卸载的，为了用这条命令只能又恢复回来，没办法啊。</p><p>使用后，建议通过 regsvr32 /u wshom.ocx 取消注册即可。</p><p>2.后来我又注册了下 regsvr32 wshom.ocx <span style="line-height:1.5">再运行iisapp还是不正常</span></p><blockquote><p>提示 “此脚本不能与Wscript工作”<br>解决办法：要在system32下输入</p></blockquote><p>c:\windows\system32&gt;cscript iisapp.vbs 才可以</p><p>&nbsp;</p><p>初期解决办法：用net stop w3svc停掉WEB服务，看CPU占用是否正常，net start w3svc启动WEB</p><p>解决CPU占用过多：<br>1、在IIS中对每个网站进行单独的应用程序池配置。即互相之间不影响。<br>2、设置应用程序池的CPU监视，不超过25%（服务器为4CPU），每分钟刷新，超过限制时关闭。</p><p>&nbsp;</p><p>&nbsp;</p></div><div></div><div></div><footer class="post-footer"><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2016-02-21-2016mubiao/" rel="next" title="种下愿望，秋后丰收"><i class="fa fa-chevron-left"></i> 种下愿望，秋后丰收</a></div><div class="post-nav-prev post-nav-item"> <a href="/2016-02-21-dangwolaole/" rel="prev" title="《当我老了》——为伟大的爸妈而转">《当我老了》——为伟大的爸妈而转<i class="fa fa-chevron-right"></i></a></div></div></footer></article><div class="post-spread"></div></div></div><div class="comments" id="comments"><div class="ds-thread" data-thread-key="2016-02-21-iisapp-web/" data-title="用iisapp查看服务器上网站占资源情况" data-url="http://liuxinggang.com/2016-02-21-iisapp-web/"></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap"> 文章目录</li><li class="sidebar-nav-overview" data-target="site-overview"> 站点概览</li></ul><section class="site-overview sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="http://liuxinggang.com/avatar.jpg" alt="刘兴刚"><p class="site-author-name" itemprop="name">刘兴刚</p><p class="site-description motion-element" itemprop="description"></p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"> <a href="/archives"><span class="site-state-item-count">72</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories"><span class="site-state-item-count">6</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags"><span class="site-state-item-count">4</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="links-of-author motion-element"></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#w3wp-exe认识入门"><span class="nav-number">1.</span> <span class="nav-text">w3wp.exe认识入门</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在执行iisapp-vbs时，可能会提示如下错误："><span class="nav-number">2.</span> <span class="nav-text">在执行iisapp.vbs时，可能会提示如下错误：</span></a></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright"> &copy; <span itemprop="copyrightYear">2017</span><span class="with-love"><i class="fa fa-heart"></i></span> <span class="author" itemprop="copyrightHolder">刘兴刚</span></div><div class="powered-by"> 由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动</div><div class="theme-info"> 主题 - <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div><div class="busuanzi-count"><script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span><span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script><script type="text/javascript">var duoshuoQuery={short_name:"liuxinggangsu"};!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.id="duoshuo-script",t.src=("https:"==document.location.protocol?"https:":"http:")+"//static.duoshuo.com/embed.js",t.charset="UTF-8",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(t)}()</script></body></html>
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="刘兴刚" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="当服务器上有N多网站时，一旦出现访问慢和卡的时候就会头痛的不知道是哪个网站出现问题而导致的，只需要用到系统上自带的cmd(命令提示符)和任务管理器。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用iisapp查看服务器上网站占资源情况">
+<meta property="og:url" content="http://liuxinggang.com/2016-02-21-iisapp-web/index.html">
+<meta property="og:site_name" content="刘兴刚博客">
+<meta property="og:description" content="当服务器上有N多网站时，一旦出现访问慢和卡的时候就会头痛的不知道是哪个网站出现问题而导致的，只需要用到系统上自带的cmd(命令提示符)和任务管理器。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://liuxinggang.com/uploads/2016/02/300x68.png">
+<meta property="og:updated_time" content="2016-06-13T09:50:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用iisapp查看服务器上网站占资源情况">
+<meta name="twitter:description" content="当服务器上有N多网站时，一旦出现访问慢和卡的时候就会头痛的不知道是哪个网站出现问题而导致的，只需要用到系统上自带的cmd(命令提示符)和任务管理器。">
+<meta name="twitter:image" content="http://liuxinggang.com/uploads/2016/02/300x68.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://liuxinggang.com/2016-02-21-iisapp-web/"/>
+
+  <title> 用iisapp查看服务器上网站占资源情况 | 刘兴刚博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ec066409d099697c71312c595dd643cc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">刘兴刚博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">关注Web开发,记录自己成长点滴</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'R4PcZp6HShaABXQ7QdsT','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                用iisapp查看服务器上网站占资源情况
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-21T15:43:00+08:00" content="2016-02-21">
+              2016-02-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/WEB开发/" itemprop="url" rel="index">
+                    <span itemprop="name">WEB开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-02-21-iisapp-web/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-02-21-iisapp-web/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv">本文阅读量
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>当服务器上有N多网站时，一旦出现访问慢和卡的时候就会头痛的不知道是哪个网站出现问题而导致的，只需要用到系统上自带的cmd(命令提示符)和任务管理器。<a id="more"></a></p>
+<p>首先，先打开任务管理器，点上面的菜单栏里的查看—-选择列，把PID给勾上，这样就能区分出各个网站所占的进程了；当然这里有一个前提就是首先得把服务器上的所有网站都独立分配一个程序池</p>
+<p>第二步，打开命令提示符，即在运行里输入CMD然后回车就行了。然后输入命令 iisapp -a  ，第一次输入的时候可能会提示需要安装个什么组件，这个组件是服务器上本来就存在的，不用下载，然后执行命令 iisapp -a就行了，就能把所有网站的应用池名字和PID号显示出来，然后根据进程里的PID号来对应看看是哪个应用程序池，然后再看看是哪个网站用到的这个应用 程序池就行了。</p>
+<h3 id="w3wp-exe认识入门"><a href="#w3wp-exe认识入门" class="headerlink" title="w3wp.exe认识入门"></a>w3wp.exe认识入门</h3><blockquote>
+<p>在Windows Server 2003中对于每一个Web应用，IIS6.0都用一个独立的w3wp.exe的实例来运行它。w3wp.exe也称为工作进程（每一个主机头都会有一个）直接在任务管理器中结束进程是不起作用的，结束后不久它会执行启动，要想结束它可以在IIS中找到相应的应用程序池停止相应的应用程序池工作。</p>
+</blockquote>
+<h3 id="在执行iisapp-vbs时，可能会提示如下错误："><a href="#在执行iisapp-vbs时，可能会提示如下错误：" class="headerlink" title="在执行iisapp.vbs时，可能会提示如下错误："></a>在执行iisapp.vbs时，可能会提示如下错误：</h3><p>1.Windows Script Component - file://C:WINDOWSsystem32iisschlp.wsc</p>
+<p>[88,25] 属性值无效 : progid</p>
+<p><img src="/uploads/2016/02/300x68.png" alt="图片1"></p>
+<p>解决方法：</p>
+<p>注册命令： regsvr32 wshom.ocx</p>
+<p>把FSO组件恢复成初始：Scripting.FileSystemObject</p>
+<p>以上两条命令都是为了ASP安全而去改名或者卸载的，为了用这条命令只能又恢复回来，没办法啊。</p>
+<p>使用后，建议通过 regsvr32 /u wshom.ocx 取消注册即可。</p>
+<p>2.后来我又注册了下 regsvr32 wshom.ocx <span style="line-height: 1.5;">再运行iisapp还是不正常</span></p>
+<blockquote>
+<p>提示 “此脚本不能与Wscript工作”<br>解决办法：要在system32下输入</p>
+</blockquote>
+<p>c:\windows\system32&gt;cscript iisapp.vbs  才可以</p>
+<p>&nbsp;</p>
+<p>初期解决办法：用net stop w3svc停掉WEB服务，看CPU占用是否正常，net start w3svc启动WEB</p>
+<p>解决CPU占用过多：<br>1、在IIS中对每个网站进行单独的应用程序池配置。即互相之间不影响。<br>2、设置应用程序池的CPU监视，不超过25%（服务器为4CPU），每分钟刷新，超过限制时关闭。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016-02-21-2016mubiao/" rel="next" title="种下愿望，秋后丰收">
+                <i class="fa fa-chevron-left"></i> 种下愿望，秋后丰收
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016-02-21-dangwolaole/" rel="prev" title="《当我老了》——为伟大的爸妈而转">
+                《当我老了》——为伟大的爸妈而转 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016-02-21-iisapp-web/"
+           data-title="用iisapp查看服务器上网站占资源情况" data-url="http://liuxinggang.com/2016-02-21-iisapp-web/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://liuxinggang.com/avatar.jpg"
+               alt="刘兴刚" />
+          <p class="site-author-name" itemprop="name">刘兴刚</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">72</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#w3wp-exe认识入门"><span class="nav-number">1.</span> <span class="nav-text">w3wp.exe认识入门</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在执行iisapp-vbs时，可能会提示如下错误："><span class="nav-number">2.</span> <span class="nav-text">在执行iisapp.vbs时，可能会提示如下错误：</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘兴刚</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"liuxinggangsu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

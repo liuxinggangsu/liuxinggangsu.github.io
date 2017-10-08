@@ -1,1 +1,1801 @@
-<!doctype html><html class="theme-next pisces use-motion"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="//fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css"><link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css"><link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css"><meta name="keywords" content="刘兴刚"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1"><meta property="og:type" content="website"><meta property="og:title" content="刘兴刚博客"><meta property="og:url" content="http://liuxinggang.com/page/3/index.html"><meta property="og:site_name" content="刘兴刚博客"><meta property="og:locale" content="zh-Hans"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="刘兴刚博客"><script type="text/javascript" id="hexo.configuration">var NexT=window.NexT||{},CONFIG={scheme:"Pisces",sidebar:{position:"left",display:"post"},fancybox:!0,motion:!0,duoshuo:{userId:0,author:"博主"}}</script><link rel="canonical" href="http://liuxinggang.com/page/3/"><title> 刘兴刚博客</title></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans"><script type="text/javascript">var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="//hm.baidu.com/hm.js?ec066409d099697c71312c595dd643cc";var c=document.getElementsByTagName("script")[0];c.parentNode.insertBefore(e,c)}()</script><div class="container one-collumn sidebar-position-left page-home"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">刘兴刚博客</span><span class="logo-line-after"><i></i></span></a></div><p class="site-subtitle">关注Web开发,记录自己成长点滴</p></div><div class="site-nav-toggle"> <button><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br> 首页</a></li><li class="menu-item menu-item-categories"><a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br> 分类</a></li><li class="menu-item menu-item-about"><a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br> 关于</a></li><li class="menu-item menu-item-archives"><a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br> 归档</a></li><li class="menu-item menu-item-tags"><a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br> 标签</a></li><li class="menu-item menu-item-search"><a href="#" class="st-search-show-outputs"><i class="menu-item-icon fa fa-search fa-fw"></i><br> 搜索</a></li></ul><div class="site-search"><form class="site-search-form"> <input type="text" id="st-search-input" class="st-search-input st-default-search-input"></form><script type="text/javascript">!function(t,e,s,n,c,i,a){t.SwiftypeObject=c,t[c]=t[c]||function(){(t[c].q=t[c].q||[]).push(arguments)},i=e.createElement(s),a=e.getElementsByTagName(s)[0],i.async=1,i.src="//s.swiftypecdn.com/install/v2/st.js",a.parentNode.insertBefore(i,a)}(window,document,"script",0,"_st"),_st("install","R4PcZp6HShaABXQ7QdsT","2.0.0")</script></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><section id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> <a class="post-title-link" href="/2016-05-10-cript-qipian/" itemprop="url">从mysql无法启动到crypt欺诈病毒解密</a></h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-05-10T16:35:27+08:00" content="2016-05-10">2016-05-10</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/WEB开发/" itemprop="url" rel="index"><span itemprop="name">WEB开发</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-05-10-cript-qipian/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-05-10-cript-qipian/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><p>今天维护的一台服务器上网站加载不出数据了，首先想到mysql数据库服务是否启动，打开服务管理器双击mysql服务发现启动按钮是灰色的，通过cmd下直接用命令登录提示连接不上数据库，就想着系统是否有问题，于是打开事件查看器，双击错误打开如下图所示：</p><div class="post-more-link text-center"> <a class="btn" href="/2016-05-10-cript-qipian/#more" rel="contents">阅读全文 &raquo;</a></div></div><div></div><div></div><footer class="post-footer"><div class="post-eof"></div></footer></article><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> <a class="post-title-link" href="/2016-05-06-vedio-smart/" itemprop="url">看电影随想</a></h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-05-06T10:25:18+08:00" content="2016-05-06">2016-05-06</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/慢生活/" itemprop="url" rel="index"><span itemprop="name">慢生活</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-05-06-vedio-smart/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-05-06-vedio-smart/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><p>最近老婆不在家，有空看了几部电影，也不知道看哪个好，就按电视家最新更新排名看了下，《万万没想到》-看到这个名字提有意思就看了，开头就是无厘头的西游记人物就立马想到前几天看的一个《大圣归来》，是个动画片，但名字的吸引力太大也是坚持看完了，觉着拍的挺没意思的，也许是今年是猴年，西游记主题的电影多了，但我感觉看无厘头西游记的故事还是挺不爽的，当然人家电影主要目的就是娱乐，但看完除了不自然的笑笑感觉看了跟没看差不多，对于思想没有任何意义，故事情节也没有太大的悬念都是大圣突然没有法力，历经艰辛后恢复法力了。</p><div class="post-more-link text-center"> <a class="btn" href="/2016-05-06-vedio-smart/#more" rel="contents">阅读全文 &raquo;</a></div></div><div></div><div></div><footer class="post-footer"><div class="post-eof"></div></footer></article><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> <a class="post-title-link" href="/2016-05-05-seven-yuyan/" itemprop="url">7个心理寓言</a></h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-05-05T10:27:43+08:00" content="2016-05-05">2016-05-05</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/转载日志/" itemprop="url" rel="index"><span itemprop="name">转载日志</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-05-05-seven-yuyan/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-05-05-seven-yuyan/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><h3 id="一、成长的寓言：做一棵永远成长的苹果树"><a href="#一、成长的寓言：做一棵永远成长的苹果树" class="headerlink" title="一、成长的寓言：做一棵永远成长的苹果树"></a>一、成长的寓言：做一棵永远成长的苹果树<div class="post-more-link text-center"> <a class="btn" href="/2016-05-05-seven-yuyan/#more" rel="contents">阅读全文 &raquo;</a></div></h3></div><div></div><div></div><footer class="post-footer"><div class="post-eof"></div></footer></article><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> <a class="post-title-link" href="/2016-05-03-windows-iis-bingfa/" itemprop="url">通过windows自带的系统监视器来查看IIS并发连接数(perfmon.msc)</a></h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-05-03T16:49:22+08:00" content="2016-05-03">2016-05-03</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/WEB开发/" itemprop="url" rel="index"><span itemprop="name">WEB开发</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-05-03-windows-iis-bingfa/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-05-03-windows-iis-bingfa/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><p>如果要查看IIS连接数，最简单方便的方法是通过“网站统计”来查看，“网站统计”的当前在线人数可以认为是当前IIS连接数。然而，“网站统计”的当前在线人数统计时间较长，一般为10分钟或15分钟，再加上统计技术及统计机制的问题，从而会产生或多或少的统计误差。</p><div class="post-more-link text-center"> <a class="btn" href="/2016-05-03-windows-iis-bingfa/#more" rel="contents">阅读全文 &raquo;</a></div></div><div></div><div></div><footer class="post-footer"><div class="post-eof"></div></footer></article><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> <a class="post-title-link" href="/2016-05-01-wa-one-jienai/" itemprop="url">娃的第一次戒奶</a></h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-05-01T20:59:03+08:00" content="2016-05-01">2016-05-01</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/我家大小姐/" itemprop="url" rel="index"><span itemprop="name">我家大小姐</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-05-01-wa-one-jienai/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-05-01-wa-one-jienai/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><p>随着五一小长假的来临，老婆也想趁着我放假给娃戒奶，时间过的真快，转眼大琪娃已经快一岁半了，老婆也是临时抱佛脚，百度了一下宝宝戒奶时间选择，由于附近这几家宝宝基本都戒奶了，老婆原先也问了下邻家戒奶过程，晚上就跃跃欲试的想给娃戒奶，让我搂着娃睡，晚上十点喂过奶后娃就睡了，而我不敢睡，我知道娃到了十二点左右又的吃奶，这时老婆临时准备了一听旺旺的奶，让娃想吃奶时喂她喝，生物钟的力量是巨大的，不到十分钟就到十二点了，娃就来回的找豆豆了，我就立马开始给娃烫奶，别说喝了，连闻都不闻，直接用手拨开，我只能抱起娃，她就一个劲的喊妈妈，让我去找妈妈，环顾了一圈没有看到，其实妈妈就躲到了床的另一头了，娃就指着堂屋说“那屋”让我去堂屋找妈妈，我就不停的用旺旺奶想试图喂娃，她就一个劲的发急不喝，泪水很快就流出来了，还可怜的说着“妈妈妈妈”，并且让我一个劲的开堂屋门出去找妈妈，我就试图用的来吸引娃的注意，还是一个劲的找妈妈，最后老婆听着娃的召唤就忍不住出来了，妈妈还是管用，老婆一喂旺旺奶还喝了两口，娃就头往后一仰意思想睡觉，其实应该是想吃奶了，以前都是老婆半夜的喂几回奶娃才能安稳睡好，老婆把娃平躺后想哄她睡觉，她来回的发急找豆豆，快到半夜两点了，老婆也妥协了，我也犹豫了，想让娃国庆时在戒奶，那时毕竟我在家时间长，老婆又百度了一下，好像啥卫生组织说的两岁之前戒奶，最终以娃的胜利告终。</p><div class="post-more-link text-center"> <a class="btn" href="/2016-05-01-wa-one-jienai/#more" rel="contents">阅读全文 &raquo;</a></div></div><div></div><div></div><footer class="post-footer"><div class="post-eof"></div></footer></article><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> <a class="post-title-link" href="/2016-04-28-windows-server-ftp/" itemprop="url">[Windows Server 2003] IIS自带FTP安装及配置方法</a></h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-04-28T16:15:19+08:00" content="2016-04-28">2016-04-28</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/WEB开发/" itemprop="url" rel="index"><span itemprop="name">WEB开发</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-04-28-windows-server-ftp/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-04-28-windows-server-ftp/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><p>一直用虚拟空间建站，ftp服务都是空间商提供，对于架设ftp服务器一直没有仔细研究，从公司目前一直在用西部建站工具集成的server-u，到办公经常内网传输文件用的QuickEasyFTPServer，虽然也遇到了西部建站工具新建站点时设置的ftp账号密码登陆不管用，当时直接设置server-u解决，今天无意看到iis自带ftp，被吸引了研究了一下，对于用户组和权限进一步增强了认识。毕竟IIS自带的FTP服务是最安全的，不会像Serv-U那样存在各种漏洞；但其配置过程也复杂一点。</p><div class="post-more-link text-center"> <a class="btn" href="/2016-04-28-windows-server-ftp/#more" rel="contents">阅读全文 &raquo;</a></div></div><div></div><div></div><footer class="post-footer"><div class="post-eof"></div></footer></article><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> <a class="post-title-link" href="/2016-04-26-duankou-jianting/" itemprop="url">对端口监听的进一步认识</a></h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-04-26T12:43:53+08:00" content="2016-04-26">2016-04-26</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/WEB开发/" itemprop="url" rel="index"><span itemprop="name">WEB开发</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-04-26-duankou-jianting/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-04-26-duankou-jianting/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><p>由于对linux不熟悉，年前接手在linux搭建网站时由于要用到多个端口，记得那时是北京一个高手指点说缺少Listen 端口号导致网站打不开，那时还写了篇《<a href="/biancheng/web%E5%BC%80%E5%8F%91/42.html">深入理解Apache虚拟主机</a>》记录下，那时候也没有深入认识监听端口，偶然看到一篇博文《解决mysql无法远程访问的问题》，博主分析是端口问题，我就百度了一下，从阿里云找到了许多无法通过外网访问指定端口的相关资料，还是非常受益的。</p><div class="post-more-link text-center"> <a class="btn" href="/2016-04-26-duankou-jianting/#more" rel="contents">阅读全文 &raquo;</a></div></div><div></div><div></div><footer class="post-footer"><div class="post-eof"></div></footer></article><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> <a class="post-title-link" href="/2016-04-26-iis7-jianting-ip/" itemprop="url">IIS7修改监听IP地址</a></h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-04-26T12:43:05+08:00" content="2016-04-26">2016-04-26</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/转载日志/" itemprop="url" rel="index"><span itemprop="name">转载日志</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-04-26-iis7-jianting-ip/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-04-26-iis7-jianting-ip/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><p>IIS7 可以通过netsh命令修改IIS监听的ip地址。 默认安装的情况下IIS7监听0.0.0.0 。默认可以通过外网地址和内网地址访问</p><div class="post-more-link text-center"> <a class="btn" href="/2016-04-26-iis7-jianting-ip/#more" rel="contents">阅读全文 &raquo;</a></div></div><div></div><div></div><footer class="post-footer"><div class="post-eof"></div></footer></article><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> <a class="post-title-link" href="/2016-04-26-iis6-jianting-ip/" itemprop="url">IIS6修改监听IP地址</a></h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-04-26T12:42:15+08:00" content="2016-04-26">2016-04-26</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/转载日志/" itemprop="url" rel="index"><span itemprop="name">转载日志</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-04-26-iis6-jianting-ip/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-04-26-iis6-jianting-ip/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><p>IIS6 可以通过httpcfg工具修改IIS监听的ip地址。 httpcfg工具下载地址：【<a href="https://www.microsoft.com/en-us/download/details.aspx?id=15326" target="_blank" rel="external">点此下载</a>】</p><div class="post-more-link text-center"> <a class="btn" href="/2016-04-26-iis6-jianting-ip/#more" rel="contents">阅读全文 &raquo;</a></div></div><div></div><div></div><footer class="post-footer"><div class="post-eof"></div></footer></article><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><header class="post-header"><h1 class="post-title" itemprop="name headline"> <a class="post-title-link" href="/2016-04-24-windows-gongju-tuijian/" itemprop="url">用对的工具做对的事——我的Windows软件</a></h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time itemprop="dateCreated" datetime="2016-04-24T15:10:05+08:00" content="2016-04-24">2016-04-24</time></span> <span class="post-category">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/转载日志/" itemprop="url" rel="index"><span itemprop="name">转载日志</span></a></span></span> <span class="post-comments-count">&nbsp; | &nbsp;<a href="/2016-04-24-windows-gongju-tuijian/#comments" itemprop="discussionUrl"><span class="post-comments-count ds-thread-count" data-thread-key="2016-04-24-windows-gongju-tuijian/" itemprop="commentsCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><p>整理一下自己多年来搜集的常用PC软件，Windows平台，有装机必备，也有些不常用但是找不到就会抓狂的神器，附上官方链接方便使用。</p><div class="post-more-link text-center"> <a class="btn" href="/2016-04-24-windows-gongju-tuijian/#more" rel="contents">阅读全文 &raquo;</a></div></div><div></div><div></div><footer class="post-footer"><div class="post-eof"></div></footer></article></section><nav class="pagination"><a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a> <a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a></nav></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><section class="site-overview sidebar-panel sidebar-panel-active"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="http://liuxinggang.com/avatar.jpg" alt="刘兴刚"><p class="site-author-name" itemprop="name">刘兴刚</p><p class="site-description motion-element" itemprop="description"></p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"> <a href="/archives"><span class="site-state-item-count">72</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories"><span class="site-state-item-count">6</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags"><span class="site-state-item-count">4</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="links-of-author motion-element"></div><div class="links-of-blogroll motion-element links-of-blogroll-inline"><div class="links-of-blogroll-title"><i class="fa fa-fw fa-globe"></i> Links</div><ul class="links-of-blogroll-list"><li class="links-of-blogroll-item"> <a href="http://liuxinggang.com/zuoxi" title="个人作息" target="_blank">个人作息</a></li><li class="links-of-blogroll-item"> <a href="http://liuxinggang.com/radio" title="音乐电台" target="_blank">音乐电台</a></li><li class="links-of-blogroll-item"> <a href="http://www.neilren.com/" title="任霏博客" target="_blank">任霏博客</a></li><li class="links-of-blogroll-item"> <a href="http://blog.gt520.com/" title="叶雨梧桐BLOG" target="_blank">叶雨梧桐BLOG</a></li><li class="links-of-blogroll-item"> <a href="http://tianzqn.com/" title="天中青年" target="_blank">天中青年</a></li><li class="links-of-blogroll-item"> <a href="https://www.freemindworld.com/blog/" title="李凡希的Blog" target="_blank">李凡希的Blog</a></li><li class="links-of-blogroll-item"> <a href="http://woshilijie.com/" title="李洁博客" target="_blank">李洁博客</a></li><li class="links-of-blogroll-item"> <a href="http://suyuening.com/" title="苏岳宁博客" target="_blank">苏岳宁博客</a></li><li class="links-of-blogroll-item"> <a href="http://www.siryin.com/" title="尹先生" target="_blank">尹先生</a></li><li class="links-of-blogroll-item"> <a href="http://www.neurallinker.com/" title="御坂网络" target="_blank">御坂网络</a></li><li class="links-of-blogroll-item"> <a href="http://www.qs5.org/" title="青石坞" target="_blank">青石坞</a></li></ul></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright"> &copy; <span itemprop="copyrightYear">2017</span><span class="with-love"><i class="fa fa-heart"></i></span> <span class="author" itemprop="copyrightHolder">刘兴刚</span></div><div class="powered-by"> 由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动</div><div class="theme-info"> 主题 - <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div><div class="busuanzi-count"><script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span><span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script><script type="text/javascript">var duoshuoQuery={short_name:"liuxinggangsu"};!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.id="duoshuo-script",t.src=("https:"==document.location.protocol?"https:":"http:")+"//static.duoshuo.com/embed.js",t.charset="UTF-8",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(t)}()</script></body></html>
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="刘兴刚" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="刘兴刚博客">
+<meta property="og:url" content="http://liuxinggang.com/page/3/index.html">
+<meta property="og:site_name" content="刘兴刚博客">
+<meta property="og:locale" content="zh-Hans">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="刘兴刚博客">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://liuxinggang.com/page/3/"/>
+
+  <title> 刘兴刚博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ec066409d099697c71312c595dd643cc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">刘兴刚博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">关注Web开发,记录自己成长点滴</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'R4PcZp6HShaABXQ7QdsT','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016-05-10-cript-qipian/" itemprop="url">
+                  从mysql无法启动到crypt欺诈病毒解密
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-10T16:35:27+08:00" content="2016-05-10">
+              2016-05-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/WEB开发/" itemprop="url" rel="index">
+                    <span itemprop="name">WEB开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-05-10-cript-qipian/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-05-10-cript-qipian/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>今天维护的一台服务器上网站加载不出数据了，首先想到mysql数据库服务是否启动，打开服务管理器双击mysql服务发现启动按钮是灰色的，通过cmd下直接用命令登录提示连接不上数据库，就想着系统是否有问题，于是打开事件查看器，双击错误打开如下图所示：
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-05-10-cript-qipian/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016-05-06-vedio-smart/" itemprop="url">
+                  看电影随想
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-06T10:25:18+08:00" content="2016-05-06">
+              2016-05-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/慢生活/" itemprop="url" rel="index">
+                    <span itemprop="name">慢生活</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-05-06-vedio-smart/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-05-06-vedio-smart/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>最近老婆不在家，有空看了几部电影，也不知道看哪个好，就按电视家最新更新排名看了下，《万万没想到》-看到这个名字提有意思就看了，开头就是无厘头的西游记人物就立马想到前几天看的一个《大圣归来》，是个动画片，但名字的吸引力太大也是坚持看完了，觉着拍的挺没意思的，也许是今年是猴年，西游记主题的电影多了，但我感觉看无厘头西游记的故事还是挺不爽的，当然人家电影主要目的就是娱乐，但看完除了不自然的笑笑感觉看了跟没看差不多，对于思想没有任何意义，故事情节也没有太大的悬念都是大圣突然没有法力，历经艰辛后恢复法力了。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-05-06-vedio-smart/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016-05-05-seven-yuyan/" itemprop="url">
+                  7个心理寓言
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-05T10:27:43+08:00" content="2016-05-05">
+              2016-05-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/转载日志/" itemprop="url" rel="index">
+                    <span itemprop="name">转载日志</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-05-05-seven-yuyan/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-05-05-seven-yuyan/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="一、成长的寓言：做一棵永远成长的苹果树"><a href="#一、成长的寓言：做一棵永远成长的苹果树" class="headerlink" title="一、成长的寓言：做一棵永远成长的苹果树"></a>一、成长的寓言：做一棵永远成长的苹果树
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-05-05-seven-yuyan/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016-05-03-windows-iis-bingfa/" itemprop="url">
+                  通过windows自带的系统监视器来查看IIS并发连接数(perfmon.msc)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-03T16:49:22+08:00" content="2016-05-03">
+              2016-05-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/WEB开发/" itemprop="url" rel="index">
+                    <span itemprop="name">WEB开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-05-03-windows-iis-bingfa/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-05-03-windows-iis-bingfa/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>如果要查看IIS连接数，最简单方便的方法是通过“网站统计”来查看，“网站统计”的当前在线人数可以认为是当前IIS连接数。然而，“网站统计”的当前在线人数统计时间较长，一般为10分钟或15分钟，再加上统计技术及统计机制的问题，从而会产生或多或少的统计误差。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-05-03-windows-iis-bingfa/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016-05-01-wa-one-jienai/" itemprop="url">
+                  娃的第一次戒奶
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-01T20:59:03+08:00" content="2016-05-01">
+              2016-05-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/我家大小姐/" itemprop="url" rel="index">
+                    <span itemprop="name">我家大小姐</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-05-01-wa-one-jienai/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-05-01-wa-one-jienai/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>随着五一小长假的来临，老婆也想趁着我放假给娃戒奶，时间过的真快，转眼大琪娃已经快一岁半了，老婆也是临时抱佛脚，百度了一下宝宝戒奶时间选择，由于附近这几家宝宝基本都戒奶了，老婆原先也问了下邻家戒奶过程，晚上就跃跃欲试的想给娃戒奶，让我搂着娃睡，晚上十点喂过奶后娃就睡了，而我不敢睡，我知道娃到了十二点左右又的吃奶，这时老婆临时准备了一听旺旺的奶，让娃想吃奶时喂她喝，生物钟的力量是巨大的，不到十分钟就到十二点了，娃就来回的找豆豆了，我就立马开始给娃烫奶，别说喝了，连闻都不闻，直接用手拨开，我只能抱起娃，她就一个劲的喊妈妈，让我去找妈妈，环顾了一圈没有看到，其实妈妈就躲到了床的另一头了，娃就指着堂屋说“那屋”让我去堂屋找妈妈，我就不停的用旺旺奶想试图喂娃，她就一个劲的发急不喝，泪水很快就流出来了，还可怜的说着“妈妈妈妈”，并且让我一个劲的开堂屋门出去找妈妈，我就试图用的来吸引娃的注意，还是一个劲的找妈妈，最后老婆听着娃的召唤就忍不住出来了，妈妈还是管用，老婆一喂旺旺奶还喝了两口，娃就头往后一仰意思想睡觉，其实应该是想吃奶了，以前都是老婆半夜的喂几回奶娃才能安稳睡好，老婆把娃平躺后想哄她睡觉，她来回的发急找豆豆，快到半夜两点了，老婆也妥协了，我也犹豫了，想让娃国庆时在戒奶，那时毕竟我在家时间长，老婆又百度了一下，好像啥卫生组织说的两岁之前戒奶，最终以娃的胜利告终。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-05-01-wa-one-jienai/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016-04-28-windows-server-ftp/" itemprop="url">
+                  [Windows Server 2003] IIS自带FTP安装及配置方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-28T16:15:19+08:00" content="2016-04-28">
+              2016-04-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/WEB开发/" itemprop="url" rel="index">
+                    <span itemprop="name">WEB开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-04-28-windows-server-ftp/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-04-28-windows-server-ftp/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>一直用虚拟空间建站，ftp服务都是空间商提供，对于架设ftp服务器一直没有仔细研究，从公司目前一直在用西部建站工具集成的server-u，到办公经常内网传输文件用的QuickEasyFTPServer，虽然也遇到了西部建站工具新建站点时设置的ftp账号密码登陆不管用，当时直接设置server-u解决，今天无意看到iis自带ftp，被吸引了研究了一下，对于用户组和权限进一步增强了认识。毕竟IIS自带的FTP服务是最安全的，不会像Serv-U那样存在各种漏洞；但其配置过程也复杂一点。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-04-28-windows-server-ftp/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016-04-26-duankou-jianting/" itemprop="url">
+                  对端口监听的进一步认识
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-26T12:43:53+08:00" content="2016-04-26">
+              2016-04-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/WEB开发/" itemprop="url" rel="index">
+                    <span itemprop="name">WEB开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-04-26-duankou-jianting/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-04-26-duankou-jianting/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>由于对linux不熟悉，年前接手在linux搭建网站时由于要用到多个端口，记得那时是北京一个高手指点说缺少Listen 端口号导致网站打不开，那时还写了篇《<a href="/biancheng/web%E5%BC%80%E5%8F%91/42.html">深入理解Apache虚拟主机</a>》记录下，那时候也没有深入认识监听端口，偶然看到一篇博文《解决mysql无法远程访问的问题》，博主分析是端口问题，我就百度了一下，从阿里云找到了许多无法通过外网访问指定端口的相关资料，还是非常受益的。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-04-26-duankou-jianting/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016-04-26-iis7-jianting-ip/" itemprop="url">
+                  IIS7修改监听IP地址
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-26T12:43:05+08:00" content="2016-04-26">
+              2016-04-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/转载日志/" itemprop="url" rel="index">
+                    <span itemprop="name">转载日志</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-04-26-iis7-jianting-ip/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-04-26-iis7-jianting-ip/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>IIS7 可以通过netsh命令修改IIS监听的ip地址。 默认安装的情况下IIS7监听0.0.0.0 。默认可以通过外网地址和内网地址访问
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-04-26-iis7-jianting-ip/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016-04-26-iis6-jianting-ip/" itemprop="url">
+                  IIS6修改监听IP地址
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-26T12:42:15+08:00" content="2016-04-26">
+              2016-04-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/转载日志/" itemprop="url" rel="index">
+                    <span itemprop="name">转载日志</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-04-26-iis6-jianting-ip/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-04-26-iis6-jianting-ip/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>IIS6 可以通过httpcfg工具修改IIS监听的ip地址。 httpcfg工具下载地址：【<a href="https://www.microsoft.com/en-us/download/details.aspx?id=15326" target="_blank" rel="external">点此下载</a>】
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-04-26-iis6-jianting-ip/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016-04-24-windows-gongju-tuijian/" itemprop="url">
+                  用对的工具做对的事——我的Windows软件
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-24T15:10:05+08:00" content="2016-04-24">
+              2016-04-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/转载日志/" itemprop="url" rel="index">
+                    <span itemprop="name">转载日志</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016-04-24-windows-gongju-tuijian/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016-04-24-windows-gongju-tuijian/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>整理一下自己多年来搜集的常用PC软件，Windows平台，有装机必备，也有些不常用但是找不到就会抓狂的神器，附上官方链接方便使用。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016-04-24-windows-gongju-tuijian/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  	
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://liuxinggang.com/avatar.jpg"
+               alt="刘兴刚" />
+          <p class="site-author-name" itemprop="name">刘兴刚</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">72</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://liuxinggang.com/zuoxi" title="个人作息" target="_blank">个人作息</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://liuxinggang.com/radio" title="音乐电台" target="_blank">音乐电台</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.neilren.com/" title="任霏博客" target="_blank">任霏博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.gt520.com/" title="叶雨梧桐BLOG" target="_blank">叶雨梧桐BLOG</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://tianzqn.com/" title="天中青年" target="_blank">天中青年</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.freemindworld.com/blog/" title="李凡希的Blog" target="_blank">李凡希的Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://woshilijie.com/" title="李洁博客" target="_blank">李洁博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://suyuening.com/" title="苏岳宁博客" target="_blank">苏岳宁博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.siryin.com/" title="尹先生" target="_blank">尹先生</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.neurallinker.com/" title="御坂网络" target="_blank">御坂网络</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qs5.org/" title="青石坞" target="_blank">青石坞</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘兴刚</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"liuxinggangsu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
